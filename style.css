@@ -21,4 +21,5 @@ li a {
 body {
     background-image: url('/assets/WebsiteBackground.JPG');
     background-repeat: no-repeat;
+    background-size: cover;
 }
