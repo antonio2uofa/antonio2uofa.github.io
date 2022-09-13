@@ -19,5 +19,6 @@ li a {
 }
 
 body {
-    background-image: "/assets/WebsiteBackground.JPG";
+    background-image: url('/assets/WebsiteBackground.JPG');
+    background-repeat: no-repeat;
 }
