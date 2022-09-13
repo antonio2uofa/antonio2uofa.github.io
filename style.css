@@ -13,7 +13,7 @@ li a:hover {
 li a {
     display: block;
     float:left;
-    background-color: black;
+    background-color: transparent;
     color: white;
     padding: 14px 16px;
 }
