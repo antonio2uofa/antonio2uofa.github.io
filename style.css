@@ -12,19 +12,18 @@ ul {
 
 #header:hover{
     background-color: rgba(0,0,0,0.5);
-    color:aliceblue;
+    color:white;
 }
 
 li a:hover {
-    background-color: rgba(255,255,255,0.5);
-    color:aliceblue;
+    color:orangered;
 }
 
 li a {
     display: block;
     float:left;
     background-color: transparent;
-    color: white;
+    color: black;
     padding: 14px 16px;
 }
 
