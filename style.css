@@ -1,14 +1,19 @@
 ul {
+    font-family:Rubik, sans-serif;
+    font-size: 30px;
     list-style-type: none;
     padding: 0;
     margin: 0;
     overflow: hidden;
     width:100%;
 }
-
+.h1 {
+    font-family: Ubuntu, sans-serif;
+    font-size: 46px;
+}
 #header {
     background-color: transparent;
-    padding:50px;
+    padding: top 20px, bottom 20px;
 }
 
 #header:hover{
@@ -17,7 +22,7 @@ ul {
 }
 
 li a:hover {
-    color:orange;
+    color:orange1;
 }
 
 li a {
