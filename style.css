@@ -2,10 +2,16 @@ ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    background-color: rgba(0,0,0,0.5);
     overflow: hidden;
 }
 
+#header {
+    background-color: transparent;
+}
+
+#header:hover{
+    background-color: rgba(0,0,0,0.5);
+}
 li a:hover {
     background-color: rgba(255,255,255,0.5);
 }
