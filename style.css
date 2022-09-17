@@ -2,7 +2,7 @@ ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    background-color: transparent;
+    background-color: rgba(0,0,0,0.5);
     overflow: hidden;
 }
 
