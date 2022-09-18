@@ -45,7 +45,7 @@ li a {
     text-align: center;
 }
 
-li a:hover {
+li a:hover:not(.active) {
     background-color: grey;
 }
 
