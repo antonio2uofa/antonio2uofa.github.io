@@ -3,9 +3,10 @@ ul {
     font-size: 20px;
     list-style-type: none;
     padding: 0;
-    margin: 0;
+    margin: auto;
     overflow: hidden;
     width:100%;
+    text-align: center;
 }
 
 #name {
@@ -34,6 +35,7 @@ li a {
     float:none;
     background-color: transparent;
     padding: 14px 16px;
+    text-align: center;
 }
 
 body {
