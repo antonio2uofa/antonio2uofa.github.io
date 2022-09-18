@@ -3,13 +3,16 @@
     font-family: Ubuntu, sans-serif;
     font-size: 46px;
     color: white;
-    padding: 0;
 }
 
 #header {
     background-color: transparent;
     padding: 20px 0px;
     color: white;
+}
+
+.adjust-line-height {
+    line-height: 0.5;
 }
 
 body {
