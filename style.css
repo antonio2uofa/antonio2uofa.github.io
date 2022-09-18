@@ -7,13 +7,18 @@ ul {
     overflow: hidden;
     width:100%;
 }
-h1.name {
+
+#name {
+    text-align: center;
     font-family: Ubuntu, sans-serif;
     font-size: 46px;
+    color: white;
 }
+
 #header {
     background-color: transparent;
     padding: 20px 0px;
+    color: white;
 }
 
 #header:hover{
@@ -22,14 +27,13 @@ h1.name {
 }
 
 li a:hover {
-    color:orange1;
+    color:orange;
 }
 
 li a {
     display: block;
     float:left;
     background-color: transparent;
-    color:white;
     padding: 14px 16px;
 }
 
