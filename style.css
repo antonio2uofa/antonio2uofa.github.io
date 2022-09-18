@@ -1,5 +1,5 @@
 ul {
-    font-family:Rubik, sans-serif;
+    font-family:Ubuntu, sans-serif;
     font-size: 20px;
     list-style-type: none;
     padding: 0;
@@ -21,13 +21,8 @@ ul {
     color: white;
 }
 
-#header:hover{
-    color:black;
-}
-
-li a:hover {
-    color:orange;
-    background-color: rgba(255,255,255,0.5);
+li a:hover, a:active {
+    background-color: grey;
 }
 
 li a {
