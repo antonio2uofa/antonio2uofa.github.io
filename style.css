@@ -56,3 +56,7 @@ li a:active {
 li a:link, a:visited {
     text-decoration: none;
 }
+
+.flex-container {
+    display: flex;
+}
