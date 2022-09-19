@@ -84,3 +84,8 @@ li a:link, a:visited {
     grid-column: 3/4;
     grid-row: 2/3;
 }
+
+.parMain {
+    padding: 10px;
+    color: white;
+}
