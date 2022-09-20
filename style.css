@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
 #name {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
@@ -14,7 +16,7 @@
 }
 
 body {
-    background-image: url('/assets/WebsiteBackground.jpg');
+    background-image: url('/assets/Images/WebsiteBackground.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
