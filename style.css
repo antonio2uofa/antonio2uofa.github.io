@@ -36,10 +36,9 @@ li {
 
 li a {
     border-radius: 25px;
-    border-color: 2px solid white;
-    color: white;
+    border: 2px solid transparent;
     display: inline-block;
-    background-color: transparent;
+    color: white;
     padding: 14px 16px;
     text-align: center;
 }
@@ -59,7 +58,7 @@ li a:link, a:visited {
 }
 
 .adjust-line-height {
-    line-height: 0.2;
+    line-height: 0;
 }
 
 .wrapper {
