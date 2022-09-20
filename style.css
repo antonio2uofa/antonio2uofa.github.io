@@ -9,7 +9,6 @@
     background-color: transparent;
     padding: 20px 0px;
     color: white;
-    position: fixed;
 }
 
 body {
@@ -28,7 +27,7 @@ ul {
     overflow: hidden;
     width:100%;
     text-align: center;
-    position: fixed;
+    position: sticky;
 }
 
 li {
@@ -37,6 +36,8 @@ li {
 
 li a {
     border-radius: 25px;
+    border-color: 2px solid white;
+    color: white;
     display: inline-block;
     background-color: transparent;
     padding: 14px 16px;
@@ -44,7 +45,7 @@ li a {
 }
 
 li a:hover:not(.active) {
-    border-color: white;
+    border: 2px solid white;
 }
 
 li a:active {
