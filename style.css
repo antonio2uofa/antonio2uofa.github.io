@@ -44,11 +44,12 @@ li a {
 }
 
 li a:hover:not(.active) {
-    background-color: grey;
+    border-color: white;
 }
 
 li a:active {
-    background-color: black;
+    background-color: white;
+    color: transparent;
 }
 
 li a:link, a:visited {
