@@ -2,7 +2,7 @@ const sectionOne = document.querySelector('.trigger');
 
 let visible = false;
 
-const options = {root: null, threshold: 0.25, rootMargin: "-100px"};
+const options = {root: null, threshold: 0.20, rootMargin: "-100px"};
 
 var faders = document.getElementsByClassName('fadeIn');
 
