@@ -96,6 +96,7 @@ li a:link, li a:visited {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     gap: 1.2rem;
+    width: 100%;
 }
 
 .box1 {
@@ -150,6 +151,7 @@ li a:link, li a:visited {
 }
 
 @media(max-width: 490px) {
+    paddint
     html {
         font-size: 13.5px;
     }
