@@ -96,7 +96,8 @@ li a:link, li a:visited {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     gap: 1.2rem;
-    width: 100%;
+    max-width: fit-content;
+    max-height: fit-content;
 }
 
 .box1 {
@@ -125,6 +126,7 @@ li a:link, li a:visited {
     grid-row: 4/5;
 }
 
+/* Transition for hidden boxes ################################################*/
 .fadeIn {
     opacity: 0;
     transition: opacity 250ms ease-in;
@@ -150,9 +152,39 @@ li a:link, li a:visited {
     transform: scale(1.05);
 }
 
+/* Making Website Dynamic*/
 @media(max-width: 490px) {
-    paddint
     html {
         font-size: 13.5px;
+    }
+
+    .wrapper {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 1.2rem;
+        max-width: fit-content;
+        max-height: fit-content;
+    }
+    
+    .box1 {
+        grid-column: 2/3;
+        grid-row: 2/4;
+        background-color: whitesmoke;
+        border-radius: 1.6rem;
+    }
+    
+    .box2 {
+        grid-column: 3/4;
+        grid-row: 2/3;
+        background-color: whitesmoke;
+        border-radius: 1.6rem;
+    }
+    
+    .box3 {
+        grid-column: 3/4;
+        grid-row: 3/4;
+        background-color: whitesmoke;
+        border-radius: 1.6rem;
     }
 }
