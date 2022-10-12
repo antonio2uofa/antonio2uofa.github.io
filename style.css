@@ -48,6 +48,7 @@ a {
 
 /* Header Styling #############################################################*/
 ul {
+    z-index: 1;
     font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
     font-size: 1.25rem;
     list-style-type: none;
@@ -92,6 +93,7 @@ li a:link, li a:visited {
 /* CSS Grid Styling #############################################################*/
 /* Need to Redesign for Mobile First */
 .wrapper {
+    z-index: 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
@@ -124,6 +126,7 @@ li a:link, li a:visited {
 .trigger {
     grid-column: 2/4;
     grid-row: 4/5;
+    z-index: -1;
 }
 
 /* Transition for hidden boxes ################################################*/
@@ -135,6 +138,11 @@ li a:link, li a:visited {
 
 .fadeIn.appear {
     opacity: 1;
+}
+
+.nav_appear {
+    backdrop-filter: blur(30px); 
+    transition: none;
 }
 
 .parMain {
@@ -152,39 +160,73 @@ li a:link, li a:visited {
     transform: scale(1.05);
 }
 
-/* Making Website Dynamic*/
-@media(max-width: 490px) {
-    html {
-        font-size: 13.5px;
-    }
+.scrolled-down {
+    transform: translateY(-100%);
+    transition: all 0.3s ease-in-out;
+}
 
+.scrolled-up {
+    transform: translateY(0);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Making Website Dynamic ####################################################### */
+@media(max-width: 1000px){
     .wrapper {
-        display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(4, 1fr);
-        gap: 1.2rem;
-        max-width: fit-content;
-        max-height: fit-content;
+        padding: 1.25rem;
     }
     
     .box1 {
-        grid-column: 2/3;
-        grid-row: 2/4;
-        background-color: whitesmoke;
-        border-radius: 1.6rem;
+        grid-column: 2/4;
+        grid-row: 2/3;
     }
     
     .box2 {
-        grid-column: 3/4;
-        grid-row: 2/3;
-        background-color: whitesmoke;
-        border-radius: 1.6rem;
+        grid-column: 2/3;
+        grid-row: 3/4;
     }
     
     .box3 {
         grid-column: 3/4;
         grid-row: 3/4;
-        background-color: whitesmoke;
-        border-radius: 1.6rem;
     }
+
+    .trigger {
+        grid-column: 2/4;
+        grid-row: 3/4;
+    }
+}
+@media(max-width: 810px) {
+    html {
+        font-size: 13.5px;
+    }
+
+    .wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        padding: 1.25rem;
+    }
+    
+    .box1 {
+        grid-column: 1/4;
+        grid-row: 2/3;
+    }
+    
+    .box2 {
+        grid-column: 1/2;
+        grid-row: 3/4;
+    }
+    
+    .box3 {
+        grid-column: 2/4;
+        grid-row: 3/4;
+    }
+
+    .trigger {
+        grid-column: 2/4;
+        grid-row: 3/4;
+    }
+    
 }
