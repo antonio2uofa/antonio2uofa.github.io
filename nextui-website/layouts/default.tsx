@@ -13,9 +13,9 @@ export default function DefaultLayout({
     <div className="relative flex flex-col h-screen">
       <Head />
       <Navbar />
-      <main className="container mx-auto max-w-7xl px-6 flex-grow pt-16">
-        {children}
-      </main>
+        <main className="container max-w-7xl px-6 flex-grow pt-16 dark:bg-[url('/img341.JPG')] bg-cover bg-center rounded-lg">
+          {children}
+        </main>
       <footer className="w-full flex items-center justify-center py-3">
         <Link
           isExternal
