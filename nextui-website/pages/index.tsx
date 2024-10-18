@@ -17,10 +17,10 @@ export default function IndexPage() {
           <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
           <br />
           <span className={title()}>
-            websites regardless of your design experience.
+            fnkfsafslad
           </span>
           <div className={subtitle({ class: "mt-4" })}>
-            Beautiful, fast and modern React UI library.
+            BGIGNINEINGEING
           </div>
         </div>
 
@@ -34,7 +34,7 @@ export default function IndexPage() {
             })}
             href={siteConfig.links.docs}
           >
-            Documentation
+            Test
           </Link>
           <Link
             isExternal
