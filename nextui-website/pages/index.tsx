@@ -1,60 +1,39 @@
-import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code";
-import { button as buttonStyles } from "@nextui-org/theme";
+import DesktopLayout from "../layouts/desktop";
+import MobileLayout from "../layouts/mobile";
+import useMediaQuery from "../components/mediaquery";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Image } from "@nextui-org/image";
+import { Button, ButtonGroup } from "@nextui-org/button";
 
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
-import DefaultLayout from "@/layouts/default";
+export default function DefaultLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const isDesktop = useMediaQuery("(min-width: 768px)"); // Adjust this to your breakpoint
 
-export default function IndexPage() {
-  return (
-    <DefaultLayout>
-      <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <div className="inline-block max-w-xl text-center justify-center">
-          <span className={title()}>Make&nbsp;</span>
-          <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-          <br />
-          <span className={title()}>
-            fnkfsafslad
-          </span>
-          <div className={subtitle({ class: "mt-4" })}>
-            BGIGNINEINGEING
-          </div>
-        </div>
-
-        <div className="flex gap-3">
-          <Link
-            isExternal
-            className={buttonStyles({
-              color: "primary",
-              radius: "full",
-              variant: "shadow",
-            })}
-            href={siteConfig.links.docs}
-          >
-            Test
-          </Link>
-          <Link
-            isExternal
-            className={buttonStyles({ variant: "bordered", radius: "full" })}
-            href={siteConfig.links.github}
-          >
-            <GithubIcon size={20} />
-            GitHub
-          </Link>
-        </div>
-
-        <div className="mt-8">
-          <Snippet hideCopyButton hideSymbol variant="bordered">
-            <span>
-              Get started by editing{" "}
-              <Code color="primary">pages/index.tsx</Code>
-            </span>
-          </Snippet>
-        </div>
-      </section>
-    </DefaultLayout>
+  return isDesktop ? (
+    <DesktopLayout>{children}</DesktopLayout>
+  ) : (
+    <MobileLayout>
+      <div className="flex flex-col gap-[5%] h-full">
+        <Card className="w-full h-full overflow-hidden bg-black">
+          <Image
+            removeWrapper
+            alt="Card background"
+            className="z-0 w-full h-full object-cover"
+            src="https://nextui.org/images/card-example-2.jpeg"
+          />
+        </Card>
+        <Card className="w-full h-full overflow-hidden bg-black">
+          <Image
+            removeWrapper
+            alt="Card background"
+            className="z-0 w-full h-full object-cover"
+            src="https://nextui.org/images/card-example-2.jpeg"
+          />
+        </Card>
+      </div>
+    </MobileLayout>
   );
 }
