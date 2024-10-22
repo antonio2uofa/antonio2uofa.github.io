@@ -22,7 +22,7 @@ export default function DefaultLayout({
             removeWrapper
             alt="Card background"
             className="z-0 w-full h-full object-cover"
-            src="https://nextui.org/images/card-example-2.jpeg"
+            src="website_photos/sitting_cross.JPG"
           />
         </Card>
         <Card className="w-full h-full overflow-hidden bg-black">
@@ -30,7 +30,7 @@ export default function DefaultLayout({
             removeWrapper
             alt="Card background"
             className="z-0 w-full h-full object-cover"
-            src="https://nextui.org/images/card-example-2.jpeg"
+            src="website_photos/hands_head.JPG"
           />
         </Card>
       </div>
