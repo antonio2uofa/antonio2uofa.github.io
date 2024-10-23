@@ -14,7 +14,7 @@ export default function DesktopLayout({
       <Head />
       <Navbar />
       <div className="mx-8 flex flex-grow">
-        <main className="container flex-grow dark:bg-[url('/img341.JPG')] bg-cover bg-center rounded-[4rem]">
+        <main className="container flex-grow dark:bg-[url('/img341.JPG')] bg-cover bg-center rounded-[4rem] z-10">
           {children}
         </main>
       </div>

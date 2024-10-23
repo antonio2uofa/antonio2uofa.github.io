@@ -1,7 +1,5 @@
 import { Link } from "@nextui-org/link";
-
 import { Head } from "./head";
-
 import { Navbar } from "@/components/navbar";
 
 export default function MobileLayout({
@@ -10,10 +8,10 @@ export default function MobileLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative flex flex-col h-screen dark:bg-[url('/img341.JPG')] bg-[url('/website_photos/stripe_album.JPG')] bg-cover overflow-auto">
+    <div className="relative flex flex-col h-screen bg-cover overflow-auto dark:bg-[url('/photos/dim/bulb_down_dim.JPG')] bg-[url('/photos/stripe_album.JPG')]">
       <Head />
       <Navbar />
-      <div className="mx-8 flex flex-grow py-2">{children}</div>
+      <main className="mx-8 flex flex-grow py-2 relative">{children}</main>
       <footer className="w-full flex items-center justify-center py-1">
         <Link
           isExternal
