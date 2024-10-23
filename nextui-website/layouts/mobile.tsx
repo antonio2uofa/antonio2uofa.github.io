@@ -10,10 +10,10 @@ export default function MobileLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative flex flex-col h-screen dark:bg-[url('/img341.JPG')]">
+    <div className="relative flex flex-col h-screen dark:bg-[url('/img341.JPG')] bg-[url('/website_photos/stripe_album.JPG')] bg-cover overflow-auto">
       <Head />
       <Navbar />
-      <div className="mx-8 flex flex-grow">{children}</div>
+      <div className="mx-8 flex flex-grow py-2">{children}</div>
       <footer className="w-full flex items-center justify-center py-1">
         <Link
           isExternal

@@ -10,14 +10,14 @@ export default function DefaultLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isDesktop = useMediaQuery("(min-width: 768px)"); // Adjust this to your breakpoint
+  const isDesktop = useMediaQuery("(min-width: 640px)"); // Adjust this to your breakpoint
 
   return isDesktop ? (
     <DesktopLayout>{children}</DesktopLayout>
   ) : (
     <MobileLayout>
       <div className="flex flex-col gap-[5%] h-full">
-        <Card className="w-full h-full overflow-hidden bg-black">
+        <Card className="hidden dark:block w-full h-full overflow-hidden">
           <Image
             removeWrapper
             alt="Card background"
@@ -25,7 +25,23 @@ export default function DefaultLayout({
             src="website_photos/sitting_cross.JPG"
           />
         </Card>
-        <Card className="w-full h-full overflow-hidden bg-black">
+        <Card className="dark:hidden w-full h-full overflow-hidden">
+          <Image
+            removeWrapper
+            alt="Card background"
+            className="z-0 w-full h-full object-cover"
+            src="website_photos/sitting_cross.JPG"
+          />
+        </Card>
+        <Card className="hidden dark:block w-full h-full overflow-hidden">
+          <Image
+            removeWrapper
+            alt="Card background"
+            className="z-0 w-full h-full object-cover"
+            src="website_photos/hands_head.JPG"
+          />
+        </Card>
+        <Card className="dark:hidden w-full h-full overflow-hidden">
           <Image
             removeWrapper
             alt="Card background"
