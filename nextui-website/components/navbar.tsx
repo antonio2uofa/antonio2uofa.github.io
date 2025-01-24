@@ -6,9 +6,9 @@ import {
   NavbarBrand,
   NavbarItem,
   NavbarMenuItem,
-} from "@nextui-org/navbar";
-import { Link } from "@nextui-org/link";
-import { link as linkStyles } from "@nextui-org/theme";
+} from "@heroui/navbar";
+import { Link } from "@heroui/link";
+import { link as linkStyles } from "@heroui/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
 
@@ -67,14 +67,8 @@ export const Navbar = () => {
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
-                }
-                href="#"
+                className="text-black dark:text-white"
+                href={item.href}
                 size="lg"
               >
                 {item.label}

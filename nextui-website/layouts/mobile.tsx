@@ -1,4 +1,4 @@
-import { Link } from "@nextui-org/link";
+import { Link } from "@heroui/link";
 import { Head } from "./head";
 import { Navbar } from "@/components/navbar";
 
@@ -7,6 +7,7 @@ export default function MobileLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // Step 1: Create a ref for the outer div
   return (
     <div className="relative flex flex-col h-screen bg-cover overflow-auto dark:bg-[url('/photos/dim/bulb_down_dim.JPG')] bg-[url('/photos/stripe_album.JPG')]">
       <Head />
@@ -19,7 +20,7 @@ export default function MobileLayout({
           href="https://nextui-docs-v2.vercel.app?utm_source=next-pages-template"
           title="nextui.org homepage"
         >
-          <span className="text-default-600">Powered by</span>
+          <span className="text-default-600">Contact me</span>
           <p className="text-primary">NextUI</p>
         </Link>
       </footer>
