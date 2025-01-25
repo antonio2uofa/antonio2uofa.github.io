@@ -88,7 +88,111 @@ export default function DefaultLayout() {
   }, [activeIndex, projects.length, isScrolling, router]);
 
   return isDesktop ? (
-    <div></div>
+    <div className="w-screen flex flex-col h-screen dark:bg-white px-4">
+      <Head />
+      <Navbar />
+      <main className="h-full w-full dark:bg-[url('/photos/HONDA_SUNSET_2_GRAY.JPG')] bg-[url('/photos/HONDA_SUNSET_GRAY.JPG')] bg-cover bg-center rounded-[2rem] z-10">
+        <div className="grid grid-rows-2 grid-cols-3 w-full h-full gap-4 p-4">
+          {/* Top Row: Three equally-sized cards */}
+          <Card
+            isPressable
+            onPress={() => router.push("/")}
+            className="row-start-1 row-span-2 dark:bg-black bg-white"
+          >
+            {/* Header Section */}
+            <CardHeader className="relative z-10 flex-col items-start pb-4">
+              <div className="absolute h-[125%] top-0 inset-0 bg-gradient-to-b from-black/95 -z-10"></div>
+              <p className="text-tiny text-red-500 uppercase font-bold">
+                HONDA
+              </p>
+              <p className="text-tiny text-white/70 uppercase">HRI2025</p>
+              <h4 className="text-white/90 font-medium text-xl">
+                Published Papers
+              </h4>
+            </CardHeader>
+
+            {/* Body Section with Text */}
+            <CardBody className="relative z-10 p-4">
+              <p className="text-gray-800 dark:text-gray-200">
+                Both of these papers were submitted to HRI2025 - a conference
+                presenting the most advanced human-robot interaction research.
+                Both of these papers look at ways of generating non-verbal cues
+                for a conversation facilitator based on the non-verbal cues of
+                the other participants in the conversation. The aim is to be
+                able to replace the human facilitator with a virtual agent or
+                robot facilitator.
+                <br /> The first paper takes an approach based around energy
+                models using raw pose data for observations. The second paper
+                uses diffusion models and image data for replicating non-verbal
+                cues.
+              </p>
+            </CardBody>
+
+            {/* Footer Section */}
+            <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-start p-4 bg-transparent rounded-bl-[2rem]">
+              <span className="justify-start material-symbols-outlined dark:text-white text-black">
+                west
+              </span>
+            </CardFooter>
+          </Card>
+
+          <Card
+            isPressable
+            onPress={() => window.open("https://arxiv.org/abs/2501.10857")}
+            className="row-start-1 row-span-2 dark:bg-[url('/photos/ibc_flow_chart_gray.png')] bg-[url('/photos/ibc_flow_chart.png')] bg-center bg-cover"
+          >
+            <CardHeader className="absolute z-10 flex-col items-start">
+              <div className="absolute h-[125%] top-0 inset-0 bg-gradient-to-b from-black/95 -z-10"></div>
+              <p className="text-tiny text-red-500 uppercase font-bold">
+                HONDA
+              </p>
+              <p className="text-tiny text-white/70 uppercase">SC - HRI2025</p>
+              <h4 className="text-white/90 font-medium text-l text-left">
+                Learning Nonverbal Cues in Multiparty Social Interactions for
+                Robotic Facilitators
+              </h4>
+            </CardHeader>
+            <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-center p-4 bg-gradient-to-t from-black gap-2">
+              <PythonChip />
+              <TensorFlowChip />
+              <DockerChip />
+            </CardFooter>
+          </Card>
+          <Card
+            isPressable
+            onPress={() => window.open("https://arxiv.org/abs/2501.10869")}
+            className="row-start-1 row-span-2 dark:bg-[url('/photos/dbc_flow_chart_gray_rotated.jpg')] bg-[url('/photos/dbc_flow_chart_rotated.jpg')] bg-center bg-cover"
+          >
+            <CardHeader className="absolute z-10 flex-col items-start">
+              <div className="absolute h-[125%] top-0 inset-0 bg-gradient-to-b from-black/95 -z-10"></div>
+              <p className="text-tiny text-red-500 uppercase font-bold">
+                HONDA
+              </p>
+              <p className="text-tiny text-white/70 uppercase">LBR - HRI2025</p>
+              <h4 className="text-white/90 font-medium text-l text-left">
+                Diffusion-Based Imitation Learning for Social Pose Generation
+              </h4>
+            </CardHeader>
+            <CardFooter className="absolute bottom-0 gap-2 inset-x-0 z-10 flex items-center justify-center p-4 bg-gradient-to-t from-black">
+              <PythonChip />
+              <PyTorchChip />
+              <DockerChip />
+            </CardFooter>
+          </Card>
+        </div>
+      </main>
+      <footer className="w-full flex items-center justify-center">
+        <Link
+          isExternal
+          className="flex items-center gap-1 text-current"
+          href="https://nextui-docs-v2.vercel.app?utm_source=next-pages-template"
+          title="nextui.org homepage"
+        >
+          <span className="text-default-600">Powered by</span>
+          <p className="text-primary">NextUI</p>
+        </Link>
+      </footer>
+    </div>
   ) : (
     <div
       ref={containerRef}

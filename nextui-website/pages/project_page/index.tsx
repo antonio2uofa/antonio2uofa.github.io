@@ -104,9 +104,13 @@ export default function DefaultLayout({
     return theme === "dark" ? darkImg.replace("dark:", "") : lightImg;
   };
 
-  return isDesktop ? (
-    <DesktopLayout>{children}</DesktopLayout>
-  ) : (
+  useEffect(() => {
+    if (isDesktop) {
+      router.push("/");
+    }
+  }, [isDesktop, router]);
+
+  return (
     <MobileLayout>
       <div className="h-full flex flex-col items-center">
         {/* Scrollable container with horizontal scroll */}
@@ -136,7 +140,7 @@ export default function DefaultLayout({
               <Image
                 removeWrapper
                 alt="Card background"
-                className="z-0 w-full h-full object-cover"
+                className="z-0 w-full h-full object-cover aspect-[16/9]"
                 src={getImageSrc(activePage - 1)}
               />
               <CardFooter className="justify-center border-white/20 border-1 overflow-hidden py-1 absolute rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
@@ -170,13 +174,12 @@ export default function DefaultLayout({
             ) {
               return (
                 <li key={page} aria-label={`page ${page}`} className="w-4 h-4">
-                  <button
+                  <div
                     className={`w-full h-full rounded-full ${
                       activePage === page
                         ? "bg-[#FFD700]/80 dark:bg-[#0028FF]/80"
                         : "bg-gray-300 hover:bg-gray-400"
                     }`}
-                    onClick={() => setPage(page)}
                   />
                 </li>
               );

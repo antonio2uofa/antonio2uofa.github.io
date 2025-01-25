@@ -10,15 +10,15 @@ export const siteConfig = {
     },
     {
       label: "PROJECTS",
-      href: "/pricing",
+      href: "/project_page",
     },
     {
       label: "RESUME",
-      href: "/docs",
+      href: "/files/ALMO_Resume_2024.pdf",
     },
     {
       label: "CONTACT",
-      href: "/blog",
+      href: "/contact",
     },
   ],
   navMenuItems: [
@@ -28,7 +28,7 @@ export const siteConfig = {
     },
     {
       label: "Resume",
-      href: "/dashboard",
+      href: "/files/ALMO_Resume_2024.pdf",
     },
     {
       label: "Projects",

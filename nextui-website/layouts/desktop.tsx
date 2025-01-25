@@ -13,7 +13,7 @@ export default function DesktopLayout({
     <div className="w-screen flex flex-col h-screen dark:bg-white px-4">
       <Head />
       <Navbar />
-      <main className="h-full w-full dark:bg-[url('/img341.JPG')] bg-[url('/photos/stripe_album.JPG')] bg-cover bg-center rounded-[2rem] z-10">
+      <main className="h-full w-full dark:bg-[url('/photos/bulb_clean.JPG')] bg-[url('/photos/stripe_album.JPG')] bg-cover bg-center rounded-[2rem] z-10">
         {children}
       </main>
       <footer className="w-full flex items-center justify-center">

@@ -105,7 +105,7 @@ export const FirebaseChip = () => {
       avatar={
         <div className="h-12 w-12 flex items-center justify-center overflow-hidden rounded-full">
           <img
-            src="https://firebase.google.com/downloads/brand-guidelines/PNG/logo-vertical.png"
+            src="/icons/firebase.svg"
             alt="Firebase Logo"
             className="object-contain w-full h-full"
           />

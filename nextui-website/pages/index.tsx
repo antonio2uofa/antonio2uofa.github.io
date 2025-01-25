@@ -21,7 +21,8 @@ export default function DefaultLayout({
         {/* Top Row: Three equally-sized cards */}
         <Card
           isPressable
-          className="row-start-1 row-span-2 rounded-tl-[2rem] dark:bg-[url('/photos/HONDA_SUNSET_2_GRAY.JPG')] bg-[url('/photos/HONDA_SUNSET_GRAY.JPG')] bg-center bg-cover"
+          onPress={() => router.push("/proj_1")}
+          className="row-start-1 row-span-2 dark:bg-[url('/photos/HONDA_SUNSET_2_GRAY.JPG')] bg-[url('/photos/HONDA_SUNSET_GRAY.JPG')] bg-center bg-cover"
         >
           <CardHeader className="absolute z-10 flex-col items-start">
             <div className="absolute h-[125%] top-0 inset-0 bg-gradient-to-b from-black/95 -z-10"></div>
@@ -30,10 +31,15 @@ export default function DefaultLayout({
               Published Papers
             </h4>
           </CardHeader>
+          <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4 bg-transparent rounded-bl-[2rem]">
+            <span className="material-symbols-outlined text-white">east</span>
+          </CardFooter>
         </Card>
+
         <Card
           isPressable
-          className="row-start-1 col-span-1 dark:bg-[url('/photos/bulb_clean.JPG')] bg-[url('/photos/sitting_cross.JPG')] bg-center bg-cover"
+          onPress={() => router.push("/contact")}
+          className="row-start-1 col-span-1 dark:bg-[url('/photos/bulb_clean.JPG')] bg-[url('/photos/stripe_album.JPG')] bg-center bg-cover"
         >
           <CardHeader className="absolute z-10 flex-col items-start">
             <div className="absolute h-[125%] top-0 inset-0 bg-gradient-to-b from-black/95 -z-10"></div>
@@ -44,14 +50,18 @@ export default function DefaultLayout({
               Let's Get in Touch
             </h4>
           </CardHeader>
+          <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4">
+            <span className="material-symbols-outlined text-white">east</span>
+          </CardFooter>
         </Card>
+
         <Card
           isPressable
-          className="row-start-1 col-span-1 rounded-tr-[2rem] dark:bg-[url('/photos/hands_head.JPG')] bg-[url('/photos/sweater_smile.JPG')] bg-center bg-cover"
+          onPress={() => window.open("/files/ALMO_Resume_2024.pdf")}
+          className="row-start-1 col-span-1 dark:bg-[url('/photos/hands_head.JPG')] bg-[url('/photos/sweater_smile.JPG')] bg-center bg-cover"
         >
           <CardHeader className="absolute z-10 flex-col items-start">
             <div className="absolute h-[125%] top-0 inset-0 bg-gradient-to-b from-black/95 -z-10"></div>
-
             <p className="text-tiny text-blue-500 uppercase font-bold">
               Resume
             </p>
@@ -59,16 +69,19 @@ export default function DefaultLayout({
               Looking for Work
             </h4>
           </CardHeader>
+          <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4">
+            <span className="material-symbols-outlined text-white">east</span>
+          </CardFooter>
         </Card>
 
         {/* Bottom Row: Two cards, one wider than the other */}
         <Card
           isPressable
-          className="row-start-2 col-span-2 rounded-br-[2rem] dark:bg-[url('/photos/UOFA_BACKGROUND_GRAY.JPG')] bg-[url('/photos/UOFA_BACKGROUND_2_GRAY.JPG')] bg-center bg-cover"
+          onPress={() => router.push("/proj_2")}
+          className="row-start-2 col-span-2 dark:bg-[url('/photos/UOFA_BACKGROUND_GRAY.JPG')] bg-[url('/photos/UOFA_BACKGROUND_2_GRAY.JPG')] bg-center bg-cover"
         >
           <CardHeader className="absolute z-10 flex-col items-start">
             <div className="absolute h-[125%] top-0 inset-0 bg-gradient-to-b from-black/95 -z-10"></div>
-
             <p className="text-tiny text-green-500 uppercase font-bold">
               University of Alberta
             </p>
@@ -76,6 +89,9 @@ export default function DefaultLayout({
               Coursework & Projects
             </h4>
           </CardHeader>
+          <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4">
+            <span className="material-symbols-outlined text-white">east</span>
+          </CardFooter>
         </Card>
       </div>
     </DesktopLayout>
