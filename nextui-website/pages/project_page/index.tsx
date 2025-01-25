@@ -1,11 +1,9 @@
-import DesktopLayout from "../../layouts/desktop";
 import MobileLayout from "../../layouts/mobile";
 import useMediaQuery from "../../components/mediaquery";
 import { usePagination, PaginationItemType } from "@heroui/react";
 import { useState, useEffect, useRef } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
+import { Card, CardHeader, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
-import { Button, ButtonGroup } from "@heroui/button";
 import { useTheme } from "next-themes"; // Import the theme hook if using Next.js
 import { useRouter } from "next/router";
 

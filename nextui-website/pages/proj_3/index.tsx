@@ -1,24 +1,13 @@
-import DesktopLayout from "../../layouts/desktop";
 import useMediaQuery from "../../components/mediaquery";
-import { usePagination, PaginationItemType } from "@heroui/react";
-import { useState, useEffect, useRef, ReactNode } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
+import { useState, useEffect, useRef } from "react";
+import { Card, CardHeader, CardBody } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { useTheme } from "next-themes"; // Import the theme hook if using Next.js
 import { useRouter } from "next/router";
 import { Link } from "@heroui/link";
 import { Head } from "@/layouts/head";
 import { Navbar } from "@/components/navbar";
-import {
-  DockerChip,
-  PythonChip,
-  TensorFlowChip,
-  PyTorchChip,
-  NextJSChip,
-  FirebaseChip,
-} from "../../components/chips";
-import { Button, ButtonGroup } from "@heroui/button";
-import { Chip, Avatar } from "@heroui/react";
+import { NextJSChip, FirebaseChip } from "../../components/chips";
 
 export default function DefaultLayout() {
   const isDesktop = useMediaQuery("(min-width: 640px)");
@@ -44,9 +33,6 @@ export default function DefaultLayout() {
   const [isScrolling, setIsScrolling] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const firstProjectRef = useRef<HTMLDivElement | null>(null);
-
-  const getThemeImage = (lightImage: string, darkImage: string) =>
-    theme === "dark" ? darkImage : lightImage;
 
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {
