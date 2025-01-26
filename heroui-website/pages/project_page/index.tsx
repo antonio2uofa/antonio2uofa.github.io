@@ -236,75 +236,132 @@ export default function DefaultLayout() {
     boundaries: 1,
   });
 
+  // Ref for the scrollable container
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
-
+  // To control the cooldown for scrolling
   const [isScrolling, setIsScrolling] = useState(false);
 
-  // Function to handle both touch and wheel events
-  const handleScroll = (event: WheelEvent | TouchEvent) => {
-    // Prevent scrolling multiple pages at once
-    if (isScrolling) return;
+  useEffect(() => {
+    const handleWheel = (event: WheelEvent) => {
+      // Prevent scrolling multiple pages at once
+      if (isScrolling) return;
 
-    setIsScrolling(true);
-    setTimeout(() => setIsScrolling(false), 750); // Cooldown period (750ms)
+      setIsScrolling(true);
+      setTimeout(() => setIsScrolling(false), 750); // Cooldown period (750ms)
 
-    if ("deltaY" in event) {
-      // Handle wheel events
       if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
         // Vertical scrolling detected
         if (event.deltaY > 0) {
+          // Scroll up: Navigate to the project page or update content
           if (activePage <= projects.length) {
             router.push(projects[activePage - 1].link); // Navigate to next project
           }
         }
-      }
-    } else if ("touches" in event) {
-      // Handle touch events (mobile)
-      const touch = event.touches[0];
-      const currentTouch = touch.clientY;
-      const lastTouch = useRef<number | null>(null);
-
-      if (lastTouch.current !== null) {
-        const delta = currentTouch - lastTouch.current;
-
-        if (delta > 0) {
-          // Swipe down
-          if (activePage <= projects.length) {
-            router.push(projects[activePage - 1].link); // Navigate to next project
-          }
+      } else {
+        // Check if the scroll is horizontal (deltaX)
+        if (event.deltaX < 1) {
+          // Scroll left
+          setPage(activePage > 1 ? activePage - 1 : 1);
+        } else if (event.deltaX > -1) {
+          // Scroll right
+          setPage(
+            activePage < projects.length ? activePage + 1 : projects.length
+          );
         }
       }
+    };
 
-      lastTouch.current = currentTouch;
-    }
-  };
-
-  useEffect(() => {
     const container = scrollContainerRef.current;
 
     if (container) {
-      container.addEventListener("wheel", handleScroll);
-      container.addEventListener("touchmove", handleScroll);
-
-      return () => {
-        if (container) {
-          container.removeEventListener("wheel", handleScroll);
-          container.removeEventListener("touchmove", handleScroll);
-        }
-      };
+      container.addEventListener("wheel", handleWheel);
     }
+
+    // Cleanup the event listener when the component is unmounted
+    return () => {
+      if (container) {
+        container.removeEventListener("wheel", handleWheel);
+      }
+    };
   }, [activePage, setPage, isScrolling, projects.length]);
 
+  // For touch start position (for mobile)
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    const handleTouchMove = (event: TouchEvent) => {
+      if (event.touches.length > 0) {
+        const touchEnd = event.touches[0];
+
+        if (touchStartRef.current) {
+          const deltaX_mobile = touchEnd.pageX - touchStartRef.current.x;
+          const deltaY_mobile = touchEnd.pageY - touchStartRef.current.y;
+
+          // Only log and take action when deltas are non-zero
+          if (deltaX_mobile !== 0 || deltaY_mobile !== 0) {
+            // Vertical swipe (scrolling up/down)
+            if (Math.abs(deltaY_mobile) > Math.abs(deltaX_mobile)) {
+              if (deltaY_mobile > 0) {
+                // Scroll down: Navigate to the next project
+                if (activePage <= projects.length) {
+                  router.push(projects[activePage - 1].link); // Navigate to next project
+                }
+              }
+            } else {
+              // Horizontal swipe (left/right)
+              if (deltaX_mobile < 0) {
+                // Scroll left
+                setPage(activePage > 1 ? activePage - 1 : 1);
+              } else {
+                // Scroll right
+                setPage(
+                  activePage < projects.length
+                    ? activePage + 1
+                    : projects.length
+                );
+              }
+            }
+          }
+        }
+
+        // Update touch start position
+        touchStartRef.current = {
+          x: touchEnd.pageX,
+          y: touchEnd.pageY,
+        };
+      }
+    };
+
+    const container = scrollContainerRef.current;
+
+    if (container) {
+      container.addEventListener("touchmove", handleTouchMove);
+    }
+
+    // Cleanup the event listener when the component is unmounted
+    return () => {
+      if (container) {
+        container.removeEventListener("touchmove", handleTouchMove);
+      }
+    };
+  }, [activePage, setPage, projects.length]);
+
+  // Dynamic image handling
   const getImageSrc = (index: number) => {
     const [darkImg, lightImg] = projects[index].img.split(" ");
-
     return theme === "dark" ? darkImg.replace("dark:", "") : lightImg;
   };
+
+  useEffect(() => {
+    if (isDesktop) {
+      router.push("/");
+    }
+  }, [isDesktop, router]);
 
   return (
     <MobileLayout>
       <div className="h-full flex flex-col items-center">
-        {/* Scrollable container */}
+        {/* Scrollable container with horizontal scroll */}
         <div
           ref={scrollContainerRef}
           className="w-full h-full flex items-center justify-center overflow-hidden"
@@ -358,6 +415,7 @@ export default function DefaultLayout() {
               );
             }
 
+            // We skip the NEXT and PREV buttons here
             if (
               page !== PaginationItemType.NEXT &&
               page !== PaginationItemType.PREV
@@ -375,7 +433,7 @@ export default function DefaultLayout() {
               );
             }
 
-            return null;
+            return null; // Skip rendering the NEXT and PREV buttons
           })}
         </ul>
       </div>
