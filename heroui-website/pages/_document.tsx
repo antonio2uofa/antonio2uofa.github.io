@@ -8,7 +8,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         {/* Link to the favicon */}
-        <link rel="icon" href="/icons/favicon.svg" />
+        <link rel="icon" href="/icons/favicon_lightbulb_on.svg" />
       </Head>
       <body
         className={clsx(
