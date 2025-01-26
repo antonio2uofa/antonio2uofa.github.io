@@ -39,11 +39,11 @@ export default function DefaultLayout() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const firstProjectRef = useRef<HTMLDivElement | null>(null);
 
-  const getThemeImage = (lightImage, darkImage) =>
+  const getThemeImage = (lightImage: string, darkImage: string) =>
     theme === "dark" ? darkImage : lightImage;
 
   useEffect(() => {
-    const handleWheel = (event) => {
+    const handleWheel = (event: WheelEvent) => {
       if (isScrolling) return;
 
       const { deltaY } = event;
