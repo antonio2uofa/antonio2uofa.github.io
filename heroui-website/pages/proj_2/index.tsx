@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { useTheme } from "next-themes";
+import { Button } from "@heroui/button";
 import { useRouter } from "next/router";
 import { Link } from "@heroui/link";
 import { usePagination, PaginationItemType } from "@heroui/react";
@@ -62,6 +63,10 @@ export default function DefaultLayout() {
     "/photos/add_item.png",
     "/photos/guitar.png",
   ];
+
+  const handlePageClick = (index: number) => {
+    setActiveIndex(index);
+  };
 
   const { activePage, range, setPage } = usePagination({
     total: houseImages.length,
@@ -336,16 +341,7 @@ export default function DefaultLayout() {
       <Head />
       <Navbar />
       <main className="mx-8 flex flex-col py-2 relative gap-4">
-        <Card
-          ref={firstProjectRef}
-          className="w-full"
-          isPressable
-          onPress={() =>
-            window.open(
-              "https://github.com/CMPUT301F23T08/HouseHomey/tree/main"
-            )
-          }
-        >
+        <Card ref={firstProjectRef} className="w-full">
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
             <p className="text-tiny uppercase font-bold text-green-500">
               University of Alberta
@@ -353,55 +349,77 @@ export default function DefaultLayout() {
             <small className="text-default-500">CMPUT301</small>
             <h1 className="font-bold text-left">HouseHomey</h1>
           </CardHeader>
-          <CardBody className="overflow-visible p-2 flex flex-col gap-2">
-            <Image
-              alt="Card background"
-              className="object-cover rounded-xl w-full h-full aspect-[2/3]"
-              src={houseImages[activeIndex]}
-              width="screen"
-            />
+          <CardBody className="overflow-visible flex flex-col gap-2">
+            <Card
+              className="w-full h-full m-0"
+              isPressable
+              onPress={() =>
+                window.open(
+                  "https://github.com/CMPUT301F23T08/HouseHomey/tree/main"
+                )
+              }
+            >
+              <Image
+                alt="Card background"
+                className="object-cover w-full h-full aspect-[2/3]"
+                src={houseImages[activeIndex]}
+                width="screen"
+              />
+              <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4">
+                <span className="material-symbols-outlined dark:text-white text-gray-900">
+                  east
+                </span>
+              </CardFooter>
+            </Card>
             {/* Pagination controls */}
-            <ul className="flex gap-2 justify-center">
-              {range.map((page) => {
-                if (page === PaginationItemType.DOTS) {
-                  return (
-                    <li key={page} className="w-4 h-4">
-                      ...
-                    </li>
-                  );
+            <div className="flex gap-4 justify-center items-center mt-2">
+              {/* Prev Button */}
+              <button
+                onClick={() =>
+                  setActiveIndex((prev) =>
+                    prev > 0 ? prev - 1 : houseImages.length - 1
+                  )
                 }
-
-                // Skip NEXT and PREV buttons
-                if (
-                  page !== PaginationItemType.NEXT &&
-                  page !== PaginationItemType.PREV
-                ) {
-                  return (
-                    <li
-                      key={page}
-                      aria-label={`page ${page}`}
-                      className="w-4 h-4"
-                    >
-                      <div
-                        className={`w-full h-full rounded-full ${
-                          activeIndex + 1 === page // Adjusted comparison
-                            ? "bg-[#FFD700]/80 dark:bg-[#0028FF]/80"
-                            : "bg-gray-300 hover:bg-gray-400"
-                        }`}
-                      />
-                    </li>
-                  );
+                className="text-sm bg-gray-400 hover:bg-gray-500 px-2 py-1 rounded"
+              >
+                Prev
+              </button>
+              <ul className="flex gap-2">
+                {houseImages.map((_, index) => (
+                  <li
+                    key={index}
+                    aria-label={`page ${index + 1}`}
+                    className="w-4 h-4 cursor-pointer"
+                  >
+                    <div
+                      className={`w-full h-full rounded-full ${
+                        activeIndex === index
+                          ? "bg-[#FFD700]/80 dark:bg-[#0028FF]/80"
+                          : "bg-gray-300 hover:bg-gray-400"
+                      }`}
+                    />
+                  </li>
+                ))}
+              </ul>
+              {/* Next Button */}
+              <button
+                onClick={() =>
+                  setActiveIndex((prev) =>
+                    prev < houseImages.length - 1 ? prev + 1 : 0
+                  )
                 }
-
-                return null; // Skip rendering the NEXT and PREV buttons
-              })}
-            </ul>
-            <div className="flex flex-wrap gap-2">
+                className="text-sm bg-gray-400 hover:bg-gray-500 px-2 py-1 rounded"
+              >
+                Next
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2 mt-2">
               <JavaChip />
               <FirebaseChip />
             </div>
           </CardBody>
         </Card>
+
         <Card
           className="w-full"
           isPressable
@@ -427,12 +445,15 @@ export default function DefaultLayout() {
               src={"/photos/hands_head.JPG"}
               width="screen"
             />
-            <div className="flex flex-wrap gap-2">
-              <PythonChip />
-              <PyTorchChip />
-              <DockerChip />
-            </div>
+            <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4">
+              <span className="material-symbols-outlined text-white">east</span>
+            </CardFooter>
           </CardBody>
+          <div className="flex flex-wrap gap-2 p-2">
+            <PythonChip />
+            <PyTorchChip />
+            <DockerChip />
+          </div>
         </Card>
       </main>
       <footer className="w-full flex items-center justify-center">

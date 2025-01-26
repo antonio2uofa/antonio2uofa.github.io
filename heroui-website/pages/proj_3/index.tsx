@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Card, CardHeader, CardBody } from "@heroui/card";
+import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { useRouter } from "next/router";
 import { Link } from "@heroui/link";
@@ -98,15 +98,20 @@ export default function DefaultLayout() {
           <CardBody className="overflow-visible p-2 flex flex-col gap-2">
             <Image
               alt="Card background"
-              className="object-cover object-bottom rounded-xl w-full h-full aspect-[2/3]"
+              className="object-cover object-bottom rounded-xl w-full h-full aspect-[2/3] shadow-md"
               src={"/photos/journai_rotated.png"}
               width="screen"
             />
-            <div className="flex flex-wrap gap-2">
-              <FirebaseChip />
-              <NextJSChip />
-            </div>
+            <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4">
+              <span className="material-symbols-outlined dark:text-white text-gray-900">
+                east
+              </span>
+            </CardFooter>
           </CardBody>
+          <div className="flex flex-wrap gap-2 p-2">
+            <FirebaseChip />
+            <NextJSChip />
+          </div>
         </Card>
       </main>
       <footer className="w-full flex items-center justify-center">
