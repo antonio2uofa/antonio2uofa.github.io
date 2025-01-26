@@ -261,6 +261,7 @@ export default function DefaultLayout() {
                 <Card className="h-full w-full aspect-[16/9] max-h-[calc(69vh)]">
                   <img
                     src={selectedProject.image}
+                    alt={selectedProject.description}
                     className="h-full w-full aspect-[16/9] object-fill"
                   />
                 </Card>
@@ -434,14 +435,14 @@ export default function DefaultLayout() {
           </CardBody>
         </Card>
       </main>
-      <footer className="w-full flex items-center justify-center py-1">
+      <footer className="w-full flex items-center justify-center">
         <Link
           isExternal
           className="flex items-center gap-1 text-current"
           href="https://nextui-docs-v2.vercel.app?utm_source=next-pages-template"
           title="nextui.org homepage"
         >
-          <span className="text-default-600">Contact me</span>
+          <span className="text-default-600">Powered by</span>
           <p className="text-primary">NextUI</p>
         </Link>
       </footer>
