@@ -21,67 +21,45 @@ export default function DefaultLayout() {
 
   const projects = [
     {
-      title: "HONDA",
-      description: "My first published papers",
-      img: "dark:/photos/HONDA_SUNSET_2_GRAY.JPG /photos/HONDA_SUNSET_GRAY.JPG",
-      link: "/proj_1",
+      id: 1,
+      title:
+        "Learning Nonverbal Cues in Multiparty Social Interactions for Robotic Facilitators",
+      conference: "HRI2025",
+      org: "HONDA",
+      image: {
+        light: "/photos/ibc_flow_chart.png",
+        dark: "/photos/ibc_flow_chart_gray.png",
+      },
+      url: "https://arxiv.org/abs/2501.10857",
+      chips: [
+        <PythonChip key="python" />,
+        <TensorFlowChip key="tensorflow" />,
+        <DockerChip key="docker" />,
+      ],
     },
     {
-      title: "University of Alberta",
-      description: "My first work term",
-      img: "dark:/photos/UOFA_BACKGROUND_GRAY.JPG /photos/UOFA_BACKGROUND_2_GRAY.JPG",
-      link: "/proj_2",
+      id: 2,
+      title: "Diffusion-Based Imitation Learning for Social Pose Generation",
+      conference: "HRI2025",
+      org: "HONDA",
+      image: {
+        light: "/photos/dbc_flow_chart_rotated.jpg",
+        dark: "/photos/dbc_flow_chart_gray_rotated.jpg",
+      },
+      url: "https://arxiv.org/abs/2501.10869",
+      chips: [
+        <PythonChip key="python" />,
+        <PyTorchChip key="pytorch" />,
+        <DockerChip key="docker" />,
+      ],
     },
   ];
 
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const firstProjectRef = useRef<HTMLDivElement | null>(null);
 
   const getThemeImage = (lightImage: string, darkImage: string) =>
     theme === "dark" ? darkImage : lightImage;
-
-  useEffect(() => {
-    const handleWheel = (event: WheelEvent) => {
-      if (isScrolling) return;
-
-      const { deltaY } = event;
-
-      // Check if the top of the first project is in view
-      const firstProject = firstProjectRef.current;
-      if (firstProject) {
-        const rect = firstProject.getBoundingClientRect();
-        const topIsVisible = rect.top >= 0 && rect.top <= window.innerHeight;
-
-        if (topIsVisible && deltaY < -5) {
-          router.push("/project_page");
-          return;
-        }
-      }
-
-      const direction = deltaY > 0 ? 1 : -1;
-      const newIndex = activeIndex + direction;
-
-      if (newIndex >= 0 && newIndex < projects.length) {
-        setIsScrolling(true);
-        setActiveIndex(newIndex);
-
-        setTimeout(() => setIsScrolling(false), 750);
-      }
-    };
-
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener("wheel", handleWheel);
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener("wheel", handleWheel);
-      }
-    };
-  }, [activeIndex, projects.length, isScrolling, router]);
 
   return isDesktop ? (
     <div className="w-screen flex flex-col h-screen dark:bg-white px-4">
@@ -160,7 +138,7 @@ export default function DefaultLayout() {
             className="row-start-1 row-span-2 dark:bg-[url('/photos/dbc_flow_chart_gray_rotated.jpg')] bg-[url('/photos/dbc_flow_chart_rotated.jpg')] bg-center bg-cover"
           >
             <CardHeader className="absolute z-10 flex-col items-start">
-              <div className="absolute h-[125%] top-0 inset-0 bg-gradient-to-b from-black/95 -z-10"></div>
+              <div className="absolute h-[125%] top-0 inset-0 bg-gradient-to-b from-black/95 -z-10" />
               <p className="text-tiny text-red-500 uppercase font-bold">
                 HONDA
               </p>
@@ -196,70 +174,40 @@ export default function DefaultLayout() {
     >
       <Head />
       <Navbar />
-      <main className="mx-8 flex flex-col py-2 relative gap-4">
-        <Card
-          ref={firstProjectRef}
-          className="w-full"
-          isPressable
-          onPress={() => window.open("https://arxiv.org/abs/2501.10857")}
-        >
-          <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-            <p className="text-tiny uppercase font-bold text-red-500">HONDA</p>
-            <small className="text-default-500">HRI2025</small>
-            <h1 className="font-bold text-left">
-              Learning Nonverbal Cues in Multiparty Social Interactions for
-              Robotic Facilitators
-            </h1>
-          </CardHeader>
+      <main className="mx-8 flex flex-col py-2 relative gap-6">
+        {projects.map((project) => (
+          <Card
+            key={project.id}
+            className="w-full"
+            isPressable
+            onPress={() => window.open(project.url)}
+          >
+            <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+              <p className="text-tiny uppercase font-bold text-red-500">
+                {project.org}
+              </p>
+              <small className="text-default-500">{project.conference}</small>
+              <h1 className="font-bold text-left">{project.title}</h1>
+            </CardHeader>
 
-          <CardBody className="overflow-visible p-2 flex flex-col gap-2">
-            <Image
-              alt="Card background"
-              className="object-cover rounded-xl w-full h-full aspect-[2/3]"
-              src={getThemeImage(
-                "/photos/ibc_flow_chart_gray.png",
-                "/photos/ibc_flow_chart.png"
-              )}
-              width="screen"
-            />
-            <div className="flex flex-wrap gap-2">
-              <PythonChip />
-              <TensorFlowChip />
-              <DockerChip />
-            </div>
-          </CardBody>
-        </Card>
-        <Card
-          className="w-full"
-          isPressable
-          shadow="sm"
-          onPress={() => window.open("https://arxiv.org/abs/2501.10869")}
-        >
-          <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-            <p className="text-tiny uppercase font-bold text-red-500">HONDA</p>
-            <small className="text-default-500">HRI2025</small>
-            <h1 className="font-bold text-left">
-              Diffusion-Based Imitation Learning for Social Pose Generation
-            </h1>
-          </CardHeader>
-
-          <CardBody className="overflow-visible p-2 flex flex-col gap-2">
-            <Image
-              alt="Card background"
-              className="object-cover rounded-xl w-full h-full aspect-[2/3]"
-              src={getThemeImage(
-                "/photos/dbc_flow_chart_gray_rotated.jpg",
-                "/photos/dbc_flow_chart_rotated.jpg"
-              )}
-              width="screen"
-            />
-            <div className="flex flex-wrap gap-2">
-              <PythonChip />
-              <PyTorchChip />
-              <DockerChip />
-            </div>
-          </CardBody>
-        </Card>
+            <CardBody className="overflow-visible p-2 flex flex-col gap-2">
+              <Image
+                alt="Card background"
+                className="object-cover rounded-xl w-full h-full aspect-[2/3]"
+                src={getThemeImage(project.image.dark, project.image.light)}
+                width="screen"
+              />
+              <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4 rounded-bl-[2rem]">
+                <span className="material-symbols-outlined text-gray-900">
+                  east
+                </span>
+              </CardFooter>
+            </CardBody>
+            <CardFooter className="pt-0">
+              <div className="flex flex-wrap gap-2">{project.chips}</div>
+            </CardFooter>
+          </Card>
+        ))}
       </main>
       <footer className="w-full flex items-center justify-center">
         <Link
