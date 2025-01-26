@@ -1,14 +1,5 @@
-import DesktopLayout from "../../layouts/desktop";
 import useMediaQuery from "../../components/mediaquery";
-import {
-  useState,
-  useEffect,
-  useRef,
-  JSXElementConstructor,
-  ReactElement,
-  ReactNode,
-  ReactPortal,
-} from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { useTheme } from "next-themes";

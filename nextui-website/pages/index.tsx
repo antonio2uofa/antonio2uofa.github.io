@@ -2,10 +2,9 @@ import DesktopLayout from "../layouts/desktop";
 import MobileLayout from "../layouts/mobile";
 import useMediaQuery from "../components/mediaquery";
 import { useRouter } from "next/router";
-import Link from "next/link";
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
+import { Card, CardHeader, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
-import { Button, ButtonGroup } from "@heroui/button";
+import { Button } from "@heroui/button";
 
 export default function DefaultLayout({
   children,

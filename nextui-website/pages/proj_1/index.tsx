@@ -1,6 +1,4 @@
-import DesktopLayout from "../../layouts/desktop";
 import useMediaQuery from "../../components/mediaquery";
-import { usePagination, PaginationItemType } from "@heroui/react";
 import { useState, useEffect, useRef, ReactNode } from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
@@ -15,8 +13,6 @@ import {
   TensorFlowChip,
   PyTorchChip,
 } from "../../components/chips";
-import { Button, ButtonGroup } from "@heroui/button";
-import { Chip, Avatar } from "@heroui/react";
 
 export default function DefaultLayout() {
   const isDesktop = useMediaQuery("(min-width: 640px)");
