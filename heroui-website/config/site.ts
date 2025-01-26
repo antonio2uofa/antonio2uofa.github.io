@@ -1,49 +1,53 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Next.js + NextUI",
-  description: "Make beautiful websites regardless of your design experience.",
+  name: "Antonio Martin-O.",
+  description: "A personal portfolio for Antonio Martin-O.",
   navItems: [
     {
       label: "HOME",
       href: "/",
+      isExternal: false,
     },
     {
       label: "PROJECTS",
       href: "/proj_2",
+      isExternal: false,
     },
     {
       label: "RESUME",
       href: "/files/ALMO_Resume_2024.pdf",
+      isExternal: true,
     },
     {
       label: "CONTACT",
       href: "/contact",
+      isExternal: false,
     },
   ],
   navMenuItems: [
     {
       label: "Home",
       href: "/",
+      isExternal: false,
     },
     {
       label: "Resume",
       href: "/files/ALMO_Resume_2024.pdf",
+      isExternal: true,
     },
     {
       label: "Projects",
       href: "/project_page",
+      isExternal: false,
     },
     {
       label: "Contact",
       href: "/contact",
+      isExternal: false,
     },
   ],
   links: {
-    github: "https://github.com/nextui-org/nextui",
-    twitter: "https://twitter.com/getnextui",
-    docs: "https://nextui-docs-v2.vercel.app",
-    discord: "https://discord.gg/9b6yyZKmH4",
-    sponsor: "https://patreon.com/jrgarciadev",
+    github: "https://github.com/antonio2uofa",
   },
 };

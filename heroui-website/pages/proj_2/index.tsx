@@ -186,13 +186,11 @@ export default function DefaultLayout() {
             onPress={() =>
               selectedProject ? goBackToList() : router.push("/")
             }
-            className="h-full w-full flex flex-col row-start-1 row-span-1 dark:bg-gray-900 bg-white"
+            className="flex flex-col row-start-1 row-span-1 dark:bg-gray-900 bg-white"
           >
             {/* Card Header */}
             <CardHeader className="relative z-10 flex-col items-start flex-shrink-0 p-4">
-              <h4 className="text-green-500 font-medium text-xl">
-                Description
-              </h4>
+              <h4 className="text-green-500 font-bold text-xl">Description</h4>
               {!selectedProject && (
                 <div className="text-left">
                   <h5 className="text-lg font-medium text-gray-900 dark:text-gray-300">
@@ -210,9 +208,11 @@ export default function DefaultLayout() {
                 </div>
               )}
             </CardHeader>
+            {/* Spacer for dynamic height */}
+            <div className="flex-grow"></div>
 
             {/* Card Footer */}
-            <CardFooter className="flex items-center justify-start flex-shrink-0 p-4">
+            <CardFooter className="flex items-center p-4">
               <div className="text-left">
                 <span className="material-symbols-outlined">west</span>
               </div>
@@ -258,7 +258,7 @@ export default function DefaultLayout() {
                 <h4 className="text-gray-900 dark:text-gray-300 font-medium text-xl pb-2">
                   {selectedProject.title}
                 </h4>
-                <Card className="h-full w-full aspect-[16/9]">
+                <Card className="h-full w-full aspect-[16/9] max-h-[calc(69vh)]">
                   <img
                     src={selectedProject.image}
                     className="h-full w-full aspect-[16/9] object-fill"
@@ -284,7 +284,7 @@ export default function DefaultLayout() {
               <div className="h-full max-h-[calc(85vh)] p-4">
                 {/* Header for the list */}
                 <header className="mb-4">
-                  <h4 className="text-lg font-bold text-green-500">
+                  <h4 className="text-xl font-bold text-green-500">
                     Coursework & Projects
                   </h4>
                 </header>

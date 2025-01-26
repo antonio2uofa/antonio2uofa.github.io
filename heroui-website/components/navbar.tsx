@@ -23,10 +23,12 @@ export const Navbar = () => {
       height="2rem"
     >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="center">
-        <div className="hidden md:flex gap-4 justify-start ml-2">
+        {/* This content will be shown only on screens >= 640px */}
+        <div className="hidden sm:flex gap-4 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
-              <NextLink
+              <Link
+                isExternal={item.isExternal}
                 className={clsx(
                   "text-black",
                   "data-[active=true]:text-primary data-[active=true]:font-medium"
@@ -34,27 +36,27 @@ export const Navbar = () => {
                 href={item.href}
               >
                 {item.label}
-              </NextLink>
+              </Link>
             </NavbarItem>
           ))}
         </div>
       </NavbarContent>
 
       <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
+        className="hidden sm:flex basis-1/5 sm:basis-full bg-transparent"
         justify="end"
       >
-        <NavbarItem className="hidden md:flex gap-2">
+        <NavbarItem className="hidden sm:flex gap-2">
           <Link isExternal href={siteConfig.links.github} title="GitHub">
-            <GithubIcon className="text-default-500" />
+            <GithubIcon className="dark:text-default-500 text-gray-900" />
           </Link>
           <ThemeSwitch />
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarContent className="md:hidden basis-1 pl-4" justify="end">
+      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <Link isExternal href={siteConfig.links.github}>
-          <GithubIcon className="text-default-500" />
+          <GithubIcon className="dark:text-default-500 text-gray-900" />
         </Link>
         <ThemeSwitch />
         <NavbarMenuToggle />
@@ -65,6 +67,7 @@ export const Navbar = () => {
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
+                isExternal={item.isExternal}
                 className="text-black dark:text-white"
                 href={item.href}
                 size="lg"

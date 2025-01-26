@@ -10,7 +10,7 @@ export const DockerChip = () => {
           <img
             alt="Docker"
             className="w-full h-full object-contain"
-            src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png"
+            src="/icons/docker.png"
           />
         </div>
       }
@@ -48,7 +48,7 @@ export const JavaChip = () => {
           <img
             alt="Java Logo"
             className="object-contain w-full h-full"
-            src="https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg"
+            src="/icons/java.svg"
           />
         </div>
       }
@@ -67,7 +67,7 @@ export const NextJSChip = () => {
           <img
             alt="Next.js Logo"
             className="object-contain w-full h-full"
-            src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg"
+            src="/icons/nextjs.svg"
           />
         </div>
       }
@@ -87,7 +87,7 @@ export function PythonChip() {
           <img
             alt="Python Logo"
             className="object-contain w-full h-full"
-            src="https://s3.dualstack.us-east-2.amazonaws.com/pythondotorg-assets/media/files/python-logo-only.svg"
+            src="/icons/python.svg"
           />
         </div>
       }
@@ -106,7 +106,7 @@ export const PyTorchChip = () => {
           <img
             alt="PyTorch"
             className="w-full h-full object-contain"
-            src="https://pytorch.org/assets/images/pytorch-logo.png"
+            src="/icons/pytorch.svg"
           />
         </div>
       }
@@ -126,7 +126,7 @@ export function TensorFlowChip() {
           <img
             alt="TensorFlow Logo"
             className="object-contain w-full h-full"
-            src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Tensorflow_logo.svg"
+            src="/icons/tensorflow.svg"
           />
         </div>
       }
