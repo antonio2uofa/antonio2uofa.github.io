@@ -19,6 +19,7 @@ import {
   FirebaseChip,
   NextJSChip,
 } from "@/components/chips";
+import { isExternal } from "util/types";
 
 export default function DefaultLayout() {
   const isDesktop = useMediaQuery("(min-width: 640px)");
@@ -29,6 +30,8 @@ export default function DefaultLayout() {
     title: string;
     image: string;
     description: string;
+    href: string;
+    isExternal: boolean;
     tags: string[];
   };
 
@@ -152,6 +155,8 @@ export default function DefaultLayout() {
       description:
         "A group project that went through the full agile workflow to develop a fully working CRUD app in 3 months.",
       tags: ["Python", "TensorFlow", "Docker"],
+      href: "https://github.com/CMPUT301F23T08/HouseHomey",
+      isExternal: true,
     },
     {
       id: 2,
@@ -160,6 +165,17 @@ export default function DefaultLayout() {
       description:
         "A context aware journal which gives a breakdown of the emotional makeup of someone's journal entry.",
       tags: ["Python", "PyTorch", "Docker"],
+      href: "https://github.com/jdrco/JournAI",
+      isExternal: true,
+    },
+    {
+      id: 3,
+      title: "CMPUT412 - Duckiebot",
+      image: "/photos/ROBOT_BACKGROUND_2_GRAY.JPG",
+      description: "Exercise 1",
+      tags: ["Python", "Docker"],
+      href: "/proj_3",
+      isExternal: false,
     },
     // Add other projects as needed
   ];
@@ -182,7 +198,7 @@ export default function DefaultLayout() {
 
   return isDesktop ? (
     <div className="w-screen flex flex-col h-screen dark:bg-white px-4">
-      <Navbar></Navbar>
+      <Navbar />
       <main className="h-full w-full dark:bg-[url('/photos/UOFA_BACKGROUND_2_GRAY.JPG')] bg-[url('/photos/UOFA_BACKGROUND_GRAY.JPG')] bg-cover bg-center rounded-[2rem] z-10">
         <div className="grid grid-rows-2 grid-cols-3 w-full h-full gap-4 p-4">
           {/* Left card with description */}
@@ -259,26 +275,28 @@ export default function DefaultLayout() {
           <Card className="row-start-1 row-span-2 col-start-2 col-span-2 dark:bg-gray-900 bg-gray-100">
             {selectedProject ? (
               // Detailed View
-              <Card className="h-full w-full flex flex-col p-4 overflow-y-auto dark:bg-gray-900 bg-gray-100">
+              <Card
+                isPressable
+                onPress={() =>
+                  selectedProject.isExternal
+                    ? window.open(selectedProject.href)
+                    : router.push(selectedProject.href)
+                }
+                className="h-full w-full flex flex-col p-4 overflow-y-auto dark:bg-gray-900 bg-gray-100"
+              >
                 <h4 className="text-gray-900 dark:text-gray-300 font-medium text-xl pb-2">
                   {selectedProject.title}
                 </h4>
-                <Card className="h-full w-full aspect-[16/9] max-h-[calc(69vh)]">
+                <Card className="relative h-full w-full aspect-[16/9] max-h-[calc(69vh)]">
                   <img
                     src={selectedProject.image}
                     alt={selectedProject.description}
                     className="h-full w-full aspect-[16/9] object-fill"
                   />
+                  <span className="material-symbols-outlined absolute bottom-4 right-4 dark:text-gray-200">
+                    east
+                  </span>
                 </Card>
-                {/*FOR VIDEO THIS SHOULD WORK */}
-                {/* <Card className="h-full w-full aspect-[16/9]">
-                  <video
-                    controls
-                    className="h-full w-full aspect-[16/9] object-cover"
-                    src={selectedProject.image} // Assuming the 'image' is actually a video URL
-                  />
-                </Card> */}
-
                 <div className="flex gap-2 mt-4">
                   {selectedProject.tags.map((tag) => (
                     <span key={tag}>{renderChip(tag)}</span>
@@ -300,9 +318,16 @@ export default function DefaultLayout() {
                   <ul className="space-y-4">
                     {projects.map((project) => (
                       <li key={project.id} className="rounded-lg">
-                        <button
+                        <div
                           className="p-4 w-full text-left bg-gray-200 dark:bg-gray-800 rounded-lg cursor-pointer"
                           onClick={() => setSelectedProject(project)}
+                          role="button"
+                          tabIndex={0}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              setSelectedProject(project);
+                            }
+                          }}
                         >
                           <h5 className="text-md font-semibold text-gray-700 dark:text-gray-300">
                             {project.title}
@@ -310,7 +335,7 @@ export default function DefaultLayout() {
                           <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                             {project.description.substring(0, 50)}...
                           </p>
-                        </button>
+                        </div>
                       </li>
                     ))}
                   </ul>
@@ -425,9 +450,7 @@ export default function DefaultLayout() {
           isPressable
           shadow="sm"
           onPress={() =>
-            window.open(
-              "https://github.com/CMPUT301F23T08/HouseHomey/tree/main"
-            )
+            window.open("https://github.com/antonio2uofa/CMPUT412")
           }
         >
           <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
@@ -442,7 +465,7 @@ export default function DefaultLayout() {
             <Image
               alt="Card background"
               className="object-cover rounded-xl w-full h-full aspect-[2/3]"
-              src={"/photos/hands_head.JPG"}
+              src={"/photos/ROBOT_BACKGROUND_2_GRAY.JPG"}
               width="screen"
             />
             <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4">
