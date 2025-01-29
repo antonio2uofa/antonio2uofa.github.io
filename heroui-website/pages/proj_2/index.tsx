@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
-import { useTheme } from "next-themes";
 import { Button } from "@heroui/button";
 import { useRouter } from "next/router";
 import { Link } from "@heroui/link";
@@ -19,7 +18,7 @@ import {
   FirebaseChip,
   NextJSChip,
 } from "@/components/chips";
-import { isExternal } from "util/types";
+import { GithubIcon } from "@/components/icons";
 
 export default function DefaultLayout() {
   const isDesktop = useMediaQuery("(min-width: 640px)");
@@ -28,10 +27,14 @@ export default function DefaultLayout() {
   type Project = {
     id: number;
     title: string;
-    image: string;
+    display: string;
+    report: string;
     description: string;
     href: string;
     isExternal: boolean;
+    isBlogType: boolean;
+    isImageType: boolean;
+    track: string;
     tags: string[];
   };
 
@@ -60,7 +63,7 @@ export default function DefaultLayout() {
     }
   };
 
-  const houseImages = [
+  const housedisplays = [
     "/photos/login.png",
     "/photos/list.png",
     "/photos/add_item.png",
@@ -72,7 +75,7 @@ export default function DefaultLayout() {
   };
 
   const { activePage, range, setPage } = usePagination({
-    total: houseImages.length,
+    total: housedisplays.length,
     showControls: true,
     siblings: 1,
     boundaries: 1,
@@ -102,9 +105,9 @@ export default function DefaultLayout() {
       if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 5) {
         const direction = deltaX > 0 ? 1 : -1; // Right scroll or left scroll
 
-        // Update the image based on horizontal scroll
+        // Update the display based on horizontal scroll
         const newIndex = activeIndex + direction;
-        if (newIndex >= 0 && newIndex < houseImages.length) {
+        if (newIndex >= 0 && newIndex < housedisplays.length) {
           setIsScrolling(true);
           setActiveIndex(newIndex);
 
@@ -151,31 +154,44 @@ export default function DefaultLayout() {
     {
       id: 1,
       title: "CMPUT301 - HouseHomey",
-      image: "/photos/combined.jpg",
+      display: "/photos/combined.jpg",
+      report: "",
       description:
         "A group project that went through the full agile workflow to develop a fully working CRUD app in 3 months.",
       tags: ["Python", "TensorFlow", "Docker"],
       href: "https://github.com/CMPUT301F23T08/HouseHomey",
       isExternal: true,
+      isImageType: true,
+      isBlogType: false,
+      track: "",
     },
     {
       id: 2,
       title: "JournAI",
-      image: "/photos/journai.png",
+      display: "/photos/journai.png",
+      report: "",
       description:
         "A context aware journal which gives a breakdown of the emotional makeup of someone's journal entry.",
       tags: ["Python", "PyTorch", "Docker"],
       href: "https://github.com/jdrco/JournAI",
       isExternal: true,
+      isImageType: true,
+      isBlogType: false,
+      track: "",
     },
     {
       id: 3,
       title: "CMPUT412 - Duckiebot",
-      image: "/photos/ROBOT_BACKGROUND_2_GRAY.JPG",
-      description: "Exercise 1",
+      display: "/photos/ROBOT_BACKGROUND_2_GRAY.JPG",
+      report: "/files/ALMO_Resume_2024.pdf",
+      description:
+        "Exercise 1 - Setting up duckiebot environment, class github repo, and developing personal website.",
       tags: ["Python", "Docker"],
-      href: "/proj_3",
-      isExternal: false,
+      href: "https://github.com/antonio2uofa/CMPUT412",
+      isExternal: true,
+      isImageType: true,
+      isBlogType: true,
+      track: "",
     },
     // Add other projects as needed
   ];
@@ -240,69 +256,139 @@ export default function DefaultLayout() {
             </CardFooter>
           </Card>
           <Card className="row-start-2 row-span-1 dark:bg-black bg-white">
-            <div className="w-full h-full flex flex-col justify-center gap-8 text-center px-8">
+            <div className="w-full h-full flex flex-col justify-center gap-8 text-center">
               {copySuccess && (
                 <div className="text-green-500 font-bold text-lg">
                   {copySuccess}
                 </div>
               )}
-              {contactDetails.map((detail, index) =>
-                detail.label === "EMAIL" ? (
-                  <button
-                    key={index}
-                    onClick={() => handleCopyToClipboard(detail.value!)}
-                    className="text-black dark:text-gray-300 font-extrabold text-4xl uppercase tracking-wider hover:underline transition"
-                  >
-                    {detail.label}
-                  </button>
-                ) : (
-                  <a
-                    key={index}
-                    href={detail.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-black dark:text-gray-300 font-extrabold text-4xl uppercase tracking-wider hover:underline transition"
-                  >
-                    {detail.label}
-                  </a>
+
+              {selectedProject?.isBlogType ? (
+                // Display PDF and GitHub buttons when isBlogType is true
+                <div className="flex flex-col h-full w-full">
+                  <h4 className="text-green-500 font-bold text-xl p-2 text-left ml-2">
+                    Reports
+                  </h4>
+                  <div className="flex w-full h-full gap-4 p-4 pt-0">
+                    <Button
+                      as="a"
+                      href={selectedProject.report}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full h-full flex items-center justify-center text-white bg-red-500 hover:bg-red-700"
+                    >
+                      <span className="material-symbols-outlined object-cover">
+                        picture_as_pdf
+                      </span>
+                    </Button>
+                    <Button
+                      as="a"
+                      href={selectedProject.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full h-full flex items-center justify-center text-white bg-blue-500 hover:bg-blue-700"
+                    >
+                      <span className="object-cover">
+                        <GithubIcon />
+                      </span>
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                // Default clickable links
+                contactDetails.map((detail, index) =>
+                  detail.label === "EMAIL" ? (
+                    <button
+                      key={index}
+                      onClick={() => handleCopyToClipboard(detail.value!)}
+                      className="text-black dark:text-gray-300 font-extrabold text-4xl uppercase tracking-wider hover:underline transition"
+                    >
+                      {detail.label}
+                    </button>
+                  ) : (
+                    <a
+                      key={index}
+                      href={detail.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-black dark:text-gray-300 font-extrabold text-4xl uppercase tracking-wider hover:underline transition"
+                    >
+                      {detail.label}
+                    </a>
+                  )
                 )
               )}
-              {/* Feedback Message */}
             </div>
           </Card>
 
-          {/* Combined Middle and Right Cards */}
           <Card className="row-start-1 row-span-2 col-start-2 col-span-2 dark:bg-gray-900 bg-gray-100">
             {selectedProject ? (
-              // Detailed View
-              <Card
-                isPressable
-                onPress={() =>
-                  selectedProject.isExternal
-                    ? window.open(selectedProject.href)
-                    : router.push(selectedProject.href)
-                }
-                className="h-full w-full flex flex-col p-4 overflow-y-auto dark:bg-gray-900 bg-gray-100"
-              >
-                <h4 className="text-gray-900 dark:text-gray-300 font-medium text-xl pb-2">
-                  {selectedProject.title}
-                </h4>
-                <Card className="relative h-full w-full aspect-[16/9] max-h-[calc(69vh)]">
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.description}
-                    className="h-full w-full aspect-[16/9] object-fill"
-                  />
-                  <span className="material-symbols-outlined absolute bottom-4 right-4 dark:text-gray-200">
-                    east
-                  </span>
+              selectedProject.isBlogType ? (
+                // Detailed View
+                <Card className="h-full w-full flex flex-col p-4 dark:bg-gray-900 bg-gray-100">
+                  <h4 className="text-gray-900 dark:text-gray-300 font-medium text-xl pb-2">
+                    {selectedProject.title}
+                  </h4>
+                  <Card className="h-full w-full aspect-[16/9] max-h-[calc(72vh)]">
+                    {selectedProject.isImageType ? (
+                      <img
+                        src={selectedProject.display}
+                        alt={selectedProject.description}
+                        className="h-full w-full aspect-[16/9] object-cover"
+                      />
+                    ) : (
+                      /* eslint-disable-next-line jsx-a11y/media-has-caption */
+                      <video
+                        src={selectedProject.display}
+                        controls
+                        className="h-full w-full aspect-[16/9] object-cover"
+                      >
+                        <track
+                          src={selectedProject.track}
+                          kind="subtitles"
+                          srcLang="en"
+                          label="English"
+                        />
+                      </video>
+                    )}
+                  </Card>
+                  <div className="flex gap-2 mt-2">
+                    {selectedProject.tags.map((tag) => (
+                      <span key={tag}>{renderChip(tag)}</span>
+                    ))}
+                  </div>
                 </Card>
-                <div className="flex gap-2 mt-4">
-                  {selectedProject.tags.map((tag) => (
-                    <span key={tag}>{renderChip(tag)}</span>
-                  ))}
-                </div>
-              </Card>
+              ) : (
+                // Detailed View
+                <Card
+                  isPressable
+                  onPress={() =>
+                    selectedProject.isExternal
+                      ? window.open(selectedProject.href)
+                      : router.push(selectedProject.href)
+                  }
+                  className="h-full w-full flex flex-col p-4 dark:bg-gray-900 bg-gray-100"
+                >
+                  <h4 className="text-gray-900 dark:text-gray-300 font-medium text-xl pb-2">
+                    {selectedProject.title}
+                  </h4>
+                  <Card className="h-full w-full aspect-[16/9]">
+                    <img
+                      src={selectedProject.display}
+                      alt={selectedProject.description}
+                      className="h-full w-full aspect-[16/9] object-fill"
+                    />
+                    <span className="material-symbols-outlined absolute bottom-4 right-4 dark:text-gray-200">
+                      east
+                    </span>
+                  </Card>
+                  <div className="flex gap-2 mt-2">
+                    {selectedProject.tags.map((tag) => (
+                      <span key={tag}>{renderChip(tag)}</span>
+                    ))}
+                  </div>
+                </Card>
+              )
             ) : (
               // Scrollable List View
               <div className="h-full max-h-[calc(85vh)] p-4">
@@ -374,9 +460,9 @@ export default function DefaultLayout() {
             <small className="text-default-500">CMPUT301</small>
             <h1 className="font-bold text-left">HouseHomey</h1>
           </CardHeader>
-          <CardBody className="overflow-visible flex flex-col gap-2">
+          <CardBody className="flex flex-col gap-2 px-2">
             <Card
-              className="w-full h-full m-0"
+              className="w-full h-full"
               isPressable
               onPress={() =>
                 window.open(
@@ -386,11 +472,10 @@ export default function DefaultLayout() {
             >
               <Image
                 alt="Card background"
-                className="object-cover w-full h-full aspect-[2/3]"
-                src={houseImages[activeIndex]}
-                width="screen"
+                className="object-cover h-full aspect-[2/3]"
+                src={housedisplays[activeIndex]}
               />
-              <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4">
+              <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end ">
                 <span className="material-symbols-outlined dark:text-white text-gray-900">
                   east
                 </span>
@@ -402,7 +487,7 @@ export default function DefaultLayout() {
               <button
                 onClick={() =>
                   setActiveIndex((prev) =>
-                    prev > 0 ? prev - 1 : houseImages.length - 1
+                    prev > 0 ? prev - 1 : housedisplays.length - 1
                   )
                 }
                 className="text-sm bg-gray-400 hover:bg-gray-500 px-2 py-1 rounded"
@@ -410,7 +495,7 @@ export default function DefaultLayout() {
                 Prev
               </button>
               <ul className="flex gap-2">
-                {houseImages.map((_, index) => (
+                {housedisplays.map((_, index) => (
                   <li
                     key={index}
                     aria-label={`page ${index + 1}`}
@@ -430,7 +515,7 @@ export default function DefaultLayout() {
               <button
                 onClick={() =>
                   setActiveIndex((prev) =>
-                    prev < houseImages.length - 1 ? prev + 1 : 0
+                    prev < housedisplays.length - 1 ? prev + 1 : 0
                   )
                 }
                 className="text-sm bg-gray-400 hover:bg-gray-500 px-2 py-1 rounded"
