@@ -455,6 +455,30 @@ export default function ProjectList() {
   const router = useRouter();
   const isDesktop = useMediaQuery("(min-width: 640px)");
 
+  // const projects = [
+  //   {
+  //     title: "HONDA",
+  //     description: "My first published papers",
+  //     img: "dark:photos/HONDA_SUNSET_2_GRAY.JPG photos/HONDA_SUNSET_GRAY.JPG",
+  //     link: "/proj_1",
+  //     color: "text-red-500", // Unique color for HONDA
+  //   },
+  //   {
+  //     title: "University of Alberta",
+  //     description: "Coursework & Class Projects",
+  //     img: "dark:/photos/UOFA_BACKGROUND_GRAY.JPG photos/UOFA_BACKGROUND_2_GRAY.JPG",
+  //     link: "/proj_2",
+  //     color: "text-green-500", // Unique color for University of Alberta
+  //   },
+  //   {
+  //     title: "Hackathons",
+  //     description: "Explore my past projects",
+  //     img: "dark:photos/ROBOT_BACKGROUND_GRAY.JPG photos/ROBOT_BACKGROUND_2_GRAY.JPG",
+  //     link: "/proj_3",
+  //     color: "text-blue-500", // Unique color for Hackathons
+  //   },
+  // ];
+
   const projects = [
     {
       title: "HONDA",
@@ -465,17 +489,10 @@ export default function ProjectList() {
     },
     {
       title: "University of Alberta",
-      description: "Coursework & Class Projects",
+      description: "Coursework & Projects",
       img: "dark:/photos/UOFA_BACKGROUND_GRAY.JPG photos/UOFA_BACKGROUND_2_GRAY.JPG",
       link: "/proj_2",
       color: "text-green-500", // Unique color for University of Alberta
-    },
-    {
-      title: "Hackathons",
-      description: "Explore my past projects",
-      img: "dark:photos/ROBOT_BACKGROUND_GRAY.JPG photos/ROBOT_BACKGROUND_2_GRAY.JPG",
-      link: "/proj_3",
-      color: "text-blue-500", // Unique color for Hackathons
     },
   ];
 
@@ -516,7 +533,7 @@ export default function ProjectList() {
                 width="screen"
               />
             </CardBody>
-            <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4 bg-gradient-to-t dark:from-black from-white rounded-bl-[2rem]">
+            <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4 bg-gradient-to-t dark:from-black from-white">
               <span className="material-symbols-outlined dark:text-white text-gray-900">
                 east
               </span>

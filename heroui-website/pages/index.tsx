@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { Card, CardHeader, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { Button } from "@heroui/button";
+import { useTheme } from "next-themes";
 
 import DesktopLayout from "@/layouts/desktop";
 import MobileLayout from "@/layouts/mobile";
@@ -10,6 +11,13 @@ import useMediaQuery from "@/components/mediaquery";
 export default function DefaultLayout() {
   const isDesktop = useMediaQuery("(min-width: 640px)"); // Adjust this to your breakpoint
   const router = useRouter();
+  const { theme } = useTheme();
+
+  // Dynamic image handling
+  const getImageSrc = (img: string) => {
+    const [darkImg, lightImg] = img.split(" ");
+    return theme === "dark" ? darkImg.replace("dark:", "") : lightImg;
+  };
 
   return isDesktop ? (
     <DesktopLayout>
@@ -94,7 +102,11 @@ export default function DefaultLayout() {
   ) : (
     <MobileLayout>
       <div className="flex flex-col gap-[5%] h-full">
-        <Card className="hidden dark:block w-full h-full overflow-hidden">
+        <Card
+          isPressable
+          onPress={() => router.push("/project_page")}
+          className="hidden dark:block w-full h-full overflow-hidden"
+        >
           <CardHeader className="absolute z-10 flex-col !items-start">
             <div className="absolute h-[125%] top-0 inset-0 bg-gradient-to-b from-black/95 -z-10" />
             <p className="text-tiny text-[#FFD700]/80 dark:text-[#0028FF]/80 uppercase font-bold">
@@ -114,17 +126,16 @@ export default function DefaultLayout() {
             <div className="absolute h-full top-0 inset-0 bg-gradient-to-b from-black/50 to-black/50 opacity-80 -z-10" />
 
             <p className="text-tiny text-white">Learn More.</p>
-
-            <Button
-              isIconOnly
-              variant="light"
-              onPress={() => router.push("/project_page")}
-            >
-              <span className="material-symbols-outlined text-white">east</span>
-            </Button>
+            <span className="material-symbols-outlined text-white p-1">
+              east
+            </span>
           </CardFooter>
         </Card>
-        <Card className="hidden dark:block w-full h-full overflow-hidden">
+        <Card
+          isPressable
+          onPress={() => window.open("/files/ALMO_Resume_2024.pdf")}
+          className="hidden dark:block w-full h-full overflow-hidden"
+        >
           <CardHeader className="absolute z-10 flex-col !items-start">
             <div className="absolute h-[125%] top-0 inset-0 bg-gradient-to-b  from-black/95 -z-10" />
 
@@ -145,16 +156,16 @@ export default function DefaultLayout() {
             <div className="absolute h-full top-0 inset-0 bg-gradient-to-b  from-black/50 to-black/50 -z-10" />
 
             <p className="text-tiny text-white">Learn More.</p>
-            <Button
-              isIconOnly
-              variant="light"
-              onPress={() => window.open("/files/ALMO_Resume_2024.pdf")}
-            >
-              <span className="material-symbols-outlined text-white">east</span>
-            </Button>
+            <span className="material-symbols-outlined text-white p-1">
+              east
+            </span>
           </CardFooter>
         </Card>
-        <Card className="dark:hidden w-full h-full overflow-hidden">
+        <Card
+          isPressable
+          onPress={() => router.push("/project_page")}
+          className="dark:hidden w-full h-full overflow-hidden"
+        >
           <CardHeader className="absolute z-10 top-0 flex-col !items-start">
             <div className="absolute h-full top-0 inset-0 bg-gradient-to-b  from-black/50 -z-10" />
 
@@ -174,16 +185,16 @@ export default function DefaultLayout() {
           <CardFooter className="justify-between border-white/20 border-1 overflow-hidden py-1 absolute rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
             <p className="text-tiny text-white">Learn More.</p>
             <div className="absolute h-full top-0 inset-0 bg-gradient-to-b  from-black/20 to-black/20 -z-10" />
-            <Button
-              isIconOnly
-              variant="light"
-              onPress={() => router.push("/project_page")}
-            >
-              <span className="material-symbols-outlined text-white">east</span>
-            </Button>
+            <span className="material-symbols-outlined text-white p-1">
+              east
+            </span>
           </CardFooter>
         </Card>
-        <Card className="dark:hidden w-full h-full overflow-hidden">
+        <Card
+          isPressable
+          onPress={() => window.open("/files/ALMO_Resume_2024.pdf")}
+          className="dark:hidden w-full h-full overflow-hidden"
+        >
           <CardHeader className="absolute z-10 top-0 flex-col !items-start">
             <div className="absolute h-full top-0 inset-0 bg-gradient-to-b  from-black/50 -z-10" />
 
@@ -203,13 +214,9 @@ export default function DefaultLayout() {
           <CardFooter className="justify-between border-white/20 border-1 overflow-hidden py-1 absolute rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
             <p className="text-tiny text-white">Learn More.</p>
             <div className="absolute h-full top-0 inset-0 bg-gradient-to-b  from-black/20 to-black/20 -z-10" />
-            <Button
-              isIconOnly
-              variant="light"
-              onPress={() => window.open("/files/ALMO_Resume_2024.pdf")}
-            >
-              <span className="material-symbols-outlined text-white">east</span>
-            </Button>
+            <span className="material-symbols-outlined text-white p-1">
+              east
+            </span>
           </CardFooter>
         </Card>
       </div>
