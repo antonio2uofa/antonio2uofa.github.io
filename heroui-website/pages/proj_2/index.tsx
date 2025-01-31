@@ -27,15 +27,19 @@ export default function DefaultLayout() {
   type Project = {
     id: number;
     title: string;
-    display: string;
+    href: string;
     report: string;
     description: string;
-    href: string;
+    media: mediaContainer[];
     isExternal: boolean;
     isBlogType: boolean;
-    isImageType: boolean;
     track: string;
     tags: string[];
+  };
+
+  type mediaContainer = {
+    display: string;
+    isImage: boolean;
   };
 
   const renderChip = (tag: String) => {
@@ -154,42 +158,44 @@ export default function DefaultLayout() {
     {
       id: 1,
       title: "CMPUT301 - HouseHomey",
-      display: "/photos/combined.jpg",
+      href: "https://github.com/CMPUT301F23T08/HouseHomey",
       report: "",
       description:
         "A group project that went through the full agile workflow to develop a fully working CRUD app in 3 months.",
       tags: ["Python", "TensorFlow", "Docker"],
-      href: "https://github.com/CMPUT301F23T08/HouseHomey",
+      media: [{ display: "/photos/combined.jpg", isImage: true }],
       isExternal: true,
-      isImageType: true,
       isBlogType: false,
       track: "",
     },
     {
       id: 2,
       title: "JournAI",
-      display: "/photos/journai.png",
       report: "",
       description:
         "A context aware journal which gives a breakdown of the emotional makeup of someone's journal entry.",
       tags: ["Python", "PyTorch", "Docker"],
       href: "https://github.com/jdrco/JournAI",
+      media: [{ display: "/photos/journai.png", isImage: true }],
       isExternal: true,
-      isImageType: true,
       isBlogType: false,
       track: "",
     },
     {
       id: 3,
       title: "CMPUT412 - Duckiebot",
-      display: "/photos/ROBOT_BACKGROUND_2_GRAY.JPG",
-      report: "/files/ALMO_Resume_2024.pdf",
+
+      report: "/ex1/ex1.pdf",
       description:
         "Exercise 1 - Setting up duckiebot environment, class github repo, and developing personal website.",
       tags: ["Python", "Docker"],
+      media: [
+        { display: "/ex1/IMG_0572.JPG", isImage: true },
+        { display: "/ex1/IMG_0623.MOV", isImage: false },
+        { display: "/ex1/IMG_0629.MOV", isImage: false },
+      ],
       href: "https://github.com/antonio2uofa/CMPUT412",
       isExternal: true,
-      isImageType: true,
       isBlogType: true,
       track: "",
     },
@@ -323,23 +329,24 @@ export default function DefaultLayout() {
 
           <Card className="row-start-1 row-span-2 col-start-2 col-span-2 dark:bg-gray-900 bg-gray-100">
             {selectedProject ? (
-              selectedProject.isBlogType ? (
-                // Detailed View
-                <Card className="h-full w-full flex flex-col p-4 dark:bg-gray-900 bg-gray-100">
-                  <h4 className="text-gray-900 dark:text-gray-300 font-medium text-xl pb-2">
-                    {selectedProject.title}
-                  </h4>
-                  <Card className="h-full w-full aspect-[16/9] max-h-[calc(72vh)]">
-                    {selectedProject.isImageType ? (
+              // Detailed View
+              <Card className="h-full w-full flex flex-col p-4 dark:bg-gray-900 bg-gray-100">
+                <h4 className="text-gray-900 dark:text-gray-300 font-medium text-xl pb-2">
+                  {selectedProject.title}
+                </h4>
+                <Card className="h-full w-full aspect-[16/9] max-h-[calc(72vh)]">
+                  {selectedProject.media.length === 1 ? (
+                    /* Check if we are displaying an image*/
+                    selectedProject.media[0].isImage ? (
                       <img
-                        src={selectedProject.display}
+                        src={selectedProject.media[0].display}
                         alt={selectedProject.description}
-                        className="h-full w-full aspect-[16/9] object-cover"
+                        className="h-full w-full aspect-[16/9] object-fill"
                       />
                     ) : (
                       /* eslint-disable-next-line jsx-a11y/media-has-caption */
                       <video
-                        src={selectedProject.display}
+                        src={selectedProject.media[0].display}
                         controls
                         className="h-full w-full aspect-[16/9] object-cover"
                       >
@@ -350,45 +357,46 @@ export default function DefaultLayout() {
                           label="English"
                         />
                       </video>
-                    )}
-                  </Card>
-                  <div className="flex gap-2 mt-2">
-                    {selectedProject.tags.map((tag) => (
-                      <span key={tag}>{renderChip(tag)}</span>
-                    ))}
-                  </div>
+                    )
+                  ) : (
+                    /* Scrollable media list */
+                    <div className="flex h-full w-full overflow-x-auto space-x-2">
+                      {selectedProject.media.map((mediaItem, index) => (
+                        <div
+                          key={index}
+                          className="h-full w-full shrink-0 aspect-[16/9]"
+                        >
+                          {mediaItem.isImage ? (
+                            <img
+                              src={mediaItem.display}
+                              alt={selectedProject.description}
+                              className="h-full w-full object-cover rounded-lg"
+                            />
+                          ) : (
+                            <video
+                              src={mediaItem.display}
+                              controls
+                              className="h-full w-full object-cover rounded-lg"
+                            >
+                              <track
+                                src={selectedProject.track}
+                                kind="subtitles"
+                                srcLang="en"
+                                label="English"
+                              />
+                            </video>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </Card>
-              ) : (
-                // Detailed View
-                <Card
-                  isPressable
-                  onPress={() =>
-                    selectedProject.isExternal
-                      ? window.open(selectedProject.href)
-                      : router.push(selectedProject.href)
-                  }
-                  className="h-full w-full flex flex-col p-4 dark:bg-gray-900 bg-gray-100"
-                >
-                  <h4 className="text-gray-900 dark:text-gray-300 font-medium text-xl pb-2">
-                    {selectedProject.title}
-                  </h4>
-                  <Card className="h-full w-full aspect-[16/9]">
-                    <img
-                      src={selectedProject.display}
-                      alt={selectedProject.description}
-                      className="h-full w-full aspect-[16/9] object-fill"
-                    />
-                    <span className="material-symbols-outlined absolute bottom-4 right-4 dark:text-gray-200">
-                      east
-                    </span>
-                  </Card>
-                  <div className="flex gap-2 mt-2">
-                    {selectedProject.tags.map((tag) => (
-                      <span key={tag}>{renderChip(tag)}</span>
-                    ))}
-                  </div>
-                </Card>
-              )
+                <div className="flex gap-2 mt-2">
+                  {selectedProject.tags.map((tag) => (
+                    <span key={tag}>{renderChip(tag)}</span>
+                  ))}
+                </div>
+              </Card>
             ) : (
               // Scrollable List View
               <div className="h-full max-h-[calc(85vh)] p-4">
