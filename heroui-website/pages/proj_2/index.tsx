@@ -373,6 +373,7 @@ export default function DefaultLayout() {
                               className="h-full w-full object-cover rounded-lg"
                             />
                           ) : (
+                            /* eslint-disable-next-line jsx-a11y/media-has-caption */
                             <video
                               src={mediaItem.display}
                               controls
