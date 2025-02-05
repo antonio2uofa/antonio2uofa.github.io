@@ -441,6 +441,30 @@
 //   );
 // }
 
+// const projects = [
+//   {
+//     title: "HONDA",
+//     description: "My first published papers",
+//     img: "dark:photos/HONDA_SUNSET_2_GRAY.JPG photos/HONDA_SUNSET_GRAY.JPG",
+//     link: "/proj_1",
+//     color: "text-red-500", // Unique color for HONDA
+//   },
+//   {
+//     title: "University of Alberta",
+//     description: "Coursework & Class Projects",
+//     img: "dark:/photos/UOFA_BACKGROUND_GRAY.JPG photos/UOFA_BACKGROUND_2_GRAY.JPG",
+//     link: "/proj_2",
+//     color: "text-green-500", // Unique color for University of Alberta
+//   },
+//   {
+//     title: "Hackathons",
+//     description: "Explore my past projects",
+//     img: "dark:photos/ROBOT_BACKGROUND_GRAY.JPG photos/ROBOT_BACKGROUND_2_GRAY.JPG",
+//     link: "/proj_3",
+//     color: "text-blue-500", // Unique color for Hackathons
+//   },
+// ];
+
 import { useTheme } from "next-themes"; // Import the theme hook if using Next.js
 import { useEffect } from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
@@ -454,30 +478,6 @@ export default function ProjectList() {
   const { theme } = useTheme(); // Access the current theme
   const router = useRouter();
   const isDesktop = useMediaQuery("(min-width: 640px)");
-
-  // const projects = [
-  //   {
-  //     title: "HONDA",
-  //     description: "My first published papers",
-  //     img: "dark:photos/HONDA_SUNSET_2_GRAY.JPG photos/HONDA_SUNSET_GRAY.JPG",
-  //     link: "/proj_1",
-  //     color: "text-red-500", // Unique color for HONDA
-  //   },
-  //   {
-  //     title: "University of Alberta",
-  //     description: "Coursework & Class Projects",
-  //     img: "dark:/photos/UOFA_BACKGROUND_GRAY.JPG photos/UOFA_BACKGROUND_2_GRAY.JPG",
-  //     link: "/proj_2",
-  //     color: "text-green-500", // Unique color for University of Alberta
-  //   },
-  //   {
-  //     title: "Hackathons",
-  //     description: "Explore my past projects",
-  //     img: "dark:photos/ROBOT_BACKGROUND_GRAY.JPG photos/ROBOT_BACKGROUND_2_GRAY.JPG",
-  //     link: "/proj_3",
-  //     color: "text-blue-500", // Unique color for Hackathons
-  //   },
-  // ];
 
   const projects = [
     {
