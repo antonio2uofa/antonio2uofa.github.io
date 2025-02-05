@@ -16,7 +16,7 @@ export const siteConfig = {
     },
     {
       label: "RESUME",
-      href: "/files/ALMO_Resume_2024.pdf",
+      href: "/files/ALMO_Resume_2025_Revised.pdf",
       isExternal: true,
     },
     {
@@ -33,7 +33,7 @@ export const siteConfig = {
     },
     {
       label: "Resume",
-      href: "/files/ALMO_Resume_2024.pdf",
+      href: "/files/ALMO_Resume_2025_Revised.pdf",
       isExternal: true,
     },
     {
