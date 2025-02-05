@@ -421,6 +421,7 @@ export default function DefaultLayout() {
                 <div className="flex flex-row gap-2 overflow-x-auto">
                   {project.media.map((mediaItem, mediaIndex) => (
                     <div
+                      key={mediaItem.display || mediaIndex} // ✅ Fix: Add key prop
                       className={`shrink-0 w-full h-full snap-center px-2 ${
                         project.media.length === 1 ? "overflow-x-auto" : ""
                       }`}
@@ -444,6 +445,7 @@ export default function DefaultLayout() {
                           />
                         </div>
                       ) : (
+                        /* eslint-disable-next-line jsx-a11y/media-has-caption */
                         <video
                           src={mediaItem.display}
                           controls
