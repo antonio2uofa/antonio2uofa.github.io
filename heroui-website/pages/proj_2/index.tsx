@@ -4,9 +4,9 @@ import { Image } from "@heroui/image";
 import { Button } from "@heroui/button";
 import { useRouter } from "next/router";
 import { Link } from "@heroui/link";
-import { usePagination, PaginationItemType } from "@heroui/react";
 
 import useMediaQuery from "@/components/mediaquery";
+import MobileLayout from "@/layouts/mobile";
 import { Head } from "@/layouts/head";
 import { Navbar } from "@/components/navbar";
 import {
@@ -74,65 +74,9 @@ export default function DefaultLayout() {
     "/photos/guitar.png",
   ];
 
-  const handlePageClick = (index: number) => {
-    setActiveIndex(index);
-  };
-
-  const { activePage, range, setPage } = usePagination({
-    total: housedisplays.length,
-    showControls: true,
-    siblings: 1,
-    boundaries: 1,
-  });
-
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isScrolling, setIsScrolling] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const firstProjectRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const handleWheel = (event: WheelEvent) => {
-      if (isScrolling) return;
-
-      const { deltaY, deltaX } = event;
-      const firstProject = firstProjectRef.current;
-      if (firstProject) {
-        const rect = firstProject.getBoundingClientRect();
-        const topIsVisible = rect.top >= 0 && rect.top <= window.innerHeight;
-
-        if (topIsVisible && deltaY < -5) {
-          router.push("/project_page");
-          return;
-        }
-      }
-
-      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 5) {
-        const direction = deltaX > 0 ? 1 : -1; // Right scroll or left scroll
-
-        // Update the display based on horizontal scroll
-        const newIndex = activeIndex + direction;
-        if (newIndex >= 0 && newIndex < housedisplays.length) {
-          setIsScrolling(true);
-          setActiveIndex(newIndex);
-
-          setTimeout(() => setIsScrolling(false), 750);
-        }
-      } else {
-        setTimeout(() => setIsScrolling(false), 750);
-      }
-    };
-
-    const container = containerRef.current;
-    if (container) {
-      container.addEventListener("wheel", handleWheel);
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener("wheel", handleWheel);
-      }
-    };
-  }, [activeIndex, isScrolling, router]);
 
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
@@ -454,136 +398,74 @@ export default function DefaultLayout() {
       </footer>
     </div>
   ) : (
-    <div
-      ref={containerRef}
-      className="relative flex flex-col h-screen bg-cover overflow-auto dark:bg-[url('/photos/UOFA_BACKGROUND_GRAY.JPG')] bg-[url('/photos/UOFA_BACKGROUND_2_GRAY.JPG')]"
-    >
-      <Head />
-      <Navbar />
-      <main className="mx-8 flex flex-col py-2 relative gap-4">
-        <Card ref={firstProjectRef} className="w-full">
-          <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-            <p className="text-tiny uppercase font-bold text-green-500">
-              University of Alberta
-            </p>
-            <small className="text-default-500">CMPUT301</small>
-            <h1 className="font-bold text-left">HouseHomey</h1>
-          </CardHeader>
-          <CardBody className="flex flex-col gap-2 px-2">
-            <Card
-              className="w-full h-full"
-              isPressable
-              onPress={() =>
-                window.open(
-                  "https://github.com/CMPUT301F23T08/HouseHomey/tree/main"
-                )
-              }
-            >
-              <Image
-                alt="Card background"
-                className="object-cover h-full aspect-[2/3]"
-                src={housedisplays[activeIndex]}
-              />
-              <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end ">
-                <span className="material-symbols-outlined dark:text-white text-gray-900">
-                  east
-                </span>
-              </CardFooter>
-            </Card>
-            {/* Pagination controls */}
-            <div className="flex gap-4 justify-center items-center mt-2">
-              {/* Prev Button */}
-              <button
-                onClick={() =>
-                  setActiveIndex((prev) =>
-                    prev > 0 ? prev - 1 : housedisplays.length - 1
-                  )
-                }
-                className="text-sm bg-gray-400 hover:bg-gray-500 px-2 py-1 rounded"
-              >
-                Prev
-              </button>
-              <ul className="flex gap-2">
-                {housedisplays.map((_, index) => (
-                  <li
-                    key={index}
-                    aria-label={`page ${index + 1}`}
-                    className="w-4 h-4 cursor-pointer"
-                  >
+    <MobileLayout>
+      <div className="flex flex-col items-center gap-6 h-full w-full">
+        {projects.map((project, index) => (
+          <Card
+            key={index}
+            className="w-full h-full flex flex-col"
+            isPressable
+            shadow="sm"
+            onPress={() => router.push(project.href)}
+          >
+            <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+              <p className="text-md uppercase font-bold">{project.title}</p>
+              <h1 className="font-serif text-sm text-left">
+                {project.description}
+              </h1>
+            </CardHeader>
+
+            {/* Media Preview - Horizontal Scroll */}
+            <CardBody className="overflow-visible p-2 flex flex-col gap-2">
+              <div className="w-full h-full aspect-[2/3] rounded-xl overflow-hidden">
+                <div className="flex flex-row gap-2 overflow-x-auto">
+                  {project.media.map((mediaItem, mediaIndex) => (
                     <div
-                      className={`w-full h-full rounded-full ${
-                        activeIndex === index
-                          ? "bg-[#FFD700]/80 dark:bg-[#0028FF]/80"
-                          : "bg-gray-300 hover:bg-gray-400"
+                      key={mediaItem.display || mediaIndex} // ✅ Fix: Add key prop
+                      className={`shrink-0 w-full h-full snap-center px-2 ${
+                        project.media.length === 1 ? "overflow-x-auto" : ""
                       }`}
-                    />
-                  </li>
-                ))}
-              </ul>
-              {/* Next Button */}
-              <button
-                onClick={() =>
-                  setActiveIndex((prev) =>
-                    prev < housedisplays.length - 1 ? prev + 1 : 0
-                  )
-                }
-                className="text-sm bg-gray-400 hover:bg-gray-500 px-2 py-1 rounded"
-              >
-                Next
-              </button>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-2">
-              <JavaChip />
-              <FirebaseChip />
-            </div>
-          </CardBody>
-        </Card>
+                    >
+                      {mediaItem.isImage ? (
+                        <div
+                          className={`${
+                            project.media.length === 1
+                              ? "overflow-x-auto flex h-full object-cover"
+                              : "w-full h-full"
+                          } aspect-[2/3]`}
+                        >
+                          <Image
+                            alt={project.description}
+                            className={`rounded-lg ${
+                              project.media.length === 1
+                                ? "min-w-[350%]"
+                                : "w-full aspect-[2/3]"
+                            } h-full object-cover `}
+                            src={mediaItem.display}
+                          />
+                        </div>
+                      ) : (
+                        /* eslint-disable-next-line jsx-a11y/media-has-caption */
+                        <video
+                          src={mediaItem.display}
+                          controls
+                          className="w-full h-full object-cover aspect-[2/3] rounded-lg"
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </CardBody>
 
-        <Card
-          className="w-full"
-          isPressable
-          shadow="sm"
-          onPress={() =>
-            window.open("https://github.com/antonio2uofa/CMPUT412")
-          }
-        >
-          <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-            <p className="text-tiny uppercase font-bold text-green-500">
-              University of Alberta
-            </p>
-            <small className="text-default-500">CMPUT412</small>
-            <h1 className="font-bold text-left">DuckieBots</h1>
-          </CardHeader>
-
-          <CardBody className="overflow-visible p-2 flex flex-col gap-2">
-            <Image
-              alt="Card background"
-              className="object-cover rounded-xl w-full h-full aspect-[2/3]"
-              src={"/photos/ROBOT_BACKGROUND_2_GRAY.JPG"}
-              width="screen"
-            />
-            <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4">
-              <span className="material-symbols-outlined text-white">east</span>
+            <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4 bg-gradient-to-t dark:from-black from-white">
+              <span className="material-symbols-outlined dark:text-white text-gray-900">
+                east
+              </span>
             </CardFooter>
-          </CardBody>
-          <div className="flex flex-wrap gap-2 p-2">
-            <PythonChip />
-            <PyTorchChip />
-            <DockerChip />
-          </div>
-        </Card>
-      </main>
-      <footer className="w-full flex items-center justify-center">
-        <Link
-          isExternal
-          className="flex items-center gap-1 text-current"
-          href="https://nextui-docs-v2.vercel.app?utm_source=next-pages-template"
-          title="nextui.org homepage"
-        >
-          <span className="text-default-600">Powered by</span>
-          <p className="text-primary">NextUI</p>
-        </Link>
-      </footer>
-    </div>
+          </Card>
+        ))}
+      </div>
+    </MobileLayout>
   );
 }
