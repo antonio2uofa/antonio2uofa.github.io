@@ -61,7 +61,7 @@ export default function DefaultLayout() {
 
         <Card
           isPressable
-          onPress={() => window.open("/files/ALMO_Resume_2024.pdf")}
+          onPress={() => window.open("/files/ALMO_Resume_2025_Revised.pdf")}
           className="row-start-1 col-span-1 dark:bg-[url('/photos/hands_head.JPG')] bg-[url('/photos/sweater_smile.JPG')] bg-center bg-cover"
         >
           <CardHeader className="absolute z-10 flex-col items-start">
@@ -133,7 +133,7 @@ export default function DefaultLayout() {
         </Card>
         <Card
           isPressable
-          onPress={() => window.open("/files/ALMO_Resume_2024.pdf")}
+          onPress={() => window.open("/files/ALMO_Resume_2025_Revised.pdf")}
           className="hidden dark:block w-full h-full overflow-hidden"
         >
           <CardHeader className="absolute z-10 flex-col !items-start">
@@ -192,7 +192,7 @@ export default function DefaultLayout() {
         </Card>
         <Card
           isPressable
-          onPress={() => window.open("/files/ALMO_Resume_2024.pdf")}
+          onPress={() => window.open("/files/ALMO_Resume_2025_Revised.pdf")}
           className="dark:hidden w-full h-full overflow-hidden"
         >
           <CardHeader className="absolute z-10 top-0 flex-col !items-start">
