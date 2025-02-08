@@ -405,13 +405,7 @@ export default function DefaultLayout() {
     <MobileLayout>
       <div className="flex flex-col items-center gap-6 h-full w-full">
         {projects.map((project, index) => (
-          <Card
-            key={index}
-            className="w-full h-full flex flex-col"
-            isPressable
-            shadow="sm"
-            onPress={() => router.push(project.href)}
-          >
+          <Card key={index} className="w-full h-full flex flex-col" shadow="sm">
             <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
               <p className="text-md uppercase font-bold">{project.title}</p>
               <h1 className="font-serif text-sm text-left">
@@ -421,12 +415,7 @@ export default function DefaultLayout() {
 
             {/* Media Preview - Horizontal Scroll */}
             <CardBody className="overflow-visible p-2 flex flex-col gap-2">
-              <div
-                role="button"
-                tabIndex={0}
-                className="flex flex-row gap-2 overflow-x-auto"
-                onClick={(e) => e.stopPropagation()} // Prevents card press blocking scrolling
-              >
+              <div className="flex flex-row gap-2 overflow-x-auto">
                 {project.media.map((mediaItem, mediaIndex) => (
                   <div
                     key={mediaItem.display || mediaIndex}
