@@ -454,12 +454,13 @@ export default function DefaultLayout() {
               </div>
             </CardBody>
 
-            <CardFooter className="p-0 flex items-center justify-end px-4">
-              <button onClick={() => router.push(project.href)}>
-                <span className="material-symbols-outlined dark:text-white text-gray-900">
-                  east
-                </span>
-              </button>
+            <CardFooter
+              onClick={() => router.push(project.href)}
+              className="flex items-center justify-end pt-0 cursor-pointer transition-all duration-150 active:scale-95"
+            >
+              <span className="material-symbols-outlined dark:text-white text-gray-900">
+                east
+              </span>
             </CardFooter>
           </Card>
         ))}
