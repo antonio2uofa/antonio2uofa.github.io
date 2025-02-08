@@ -422,6 +422,8 @@ export default function DefaultLayout() {
             {/* Media Preview - Horizontal Scroll */}
             <CardBody className="overflow-visible p-2 flex flex-col gap-2">
               <div
+                role="button"
+                tabIndex={0}
                 className="flex flex-row gap-2 overflow-x-auto"
                 onClick={(e) => e.stopPropagation()} // Prevents card press blocking scrolling
               >
@@ -451,6 +453,7 @@ export default function DefaultLayout() {
                         />
                       </div>
                     ) : (
+                      /* eslint-disable-next-line jsx-a11y/media-has-caption */
                       <video
                         src={mediaItem.display}
                         controls
