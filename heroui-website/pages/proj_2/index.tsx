@@ -278,7 +278,11 @@ export default function DefaultLayout() {
                 <h4 className="text-gray-900 dark:text-gray-300 font-medium text-xl pb-2">
                   {selectedProject.title}
                 </h4>
-                <Card className="h-full w-full aspect-[16/9] max-h-[calc(72vh)]">
+                <Card
+                  isPressable
+                  onPress={() => router.push(selectedProject.href)}
+                  className="h-full w-full aspect-[16/9] max-h-[calc(72vh)]"
+                >
                   {selectedProject.media.length === 1 ? (
                     /* Check if we are displaying an image*/
                     selectedProject.media[0].isImage ? (
@@ -417,51 +421,56 @@ export default function DefaultLayout() {
 
             {/* Media Preview - Horizontal Scroll */}
             <CardBody className="overflow-visible p-2 flex flex-col gap-2">
-              <div className="w-full h-full aspect-[2/3] rounded-xl overflow-hidden">
-                <div className="flex flex-row gap-2 overflow-x-auto">
-                  {project.media.map((mediaItem, mediaIndex) => (
-                    <div
-                      key={mediaItem.display || mediaIndex} // ✅ Fix: Add key prop
-                      className={`shrink-0 w-full h-full snap-center px-2 ${
-                        project.media.length === 1 ? "overflow-x-auto" : ""
-                      }`}
-                    >
-                      {mediaItem.isImage ? (
-                        <div
-                          className={`${
+              <div
+                role="button"
+                tabIndex={0}
+                className="flex flex-row gap-2 overflow-x-auto"
+                onClick={(e) => e.stopPropagation()} // Prevents card press blocking scrolling
+              >
+                {project.media.map((mediaItem, mediaIndex) => (
+                  <div
+                    key={mediaItem.display || mediaIndex}
+                    className={`shrink-0 w-full h-full snap-center px-2 ${
+                      project.media.length === 1 ? "overflow-x-auto" : ""
+                    }`}
+                  >
+                    {mediaItem.isImage ? (
+                      <div
+                        className={`${
+                          project.media.length === 1
+                            ? "overflow-x-auto flex h-full object-cover"
+                            : "w-full h-full"
+                        } aspect-[2/3]`}
+                      >
+                        <Image
+                          alt={project.description}
+                          className={`rounded-lg ${
                             project.media.length === 1
-                              ? "overflow-x-auto flex h-full object-cover"
-                              : "w-full h-full"
-                          } aspect-[2/3]`}
-                        >
-                          <Image
-                            alt={project.description}
-                            className={`rounded-lg ${
-                              project.media.length === 1
-                                ? "min-w-[350%]"
-                                : "w-full aspect-[2/3]"
-                            } h-full object-cover `}
-                            src={mediaItem.display}
-                          />
-                        </div>
-                      ) : (
-                        /* eslint-disable-next-line jsx-a11y/media-has-caption */
-                        <video
+                              ? "min-w-[350%]"
+                              : "w-full aspect-[2/3]"
+                          } h-full object-cover `}
                           src={mediaItem.display}
-                          controls
-                          className="w-full h-full object-cover aspect-[2/3] rounded-lg"
                         />
-                      )}
-                    </div>
-                  ))}
-                </div>
+                      </div>
+                    ) : (
+                      /* eslint-disable-next-line jsx-a11y/media-has-caption */
+                      <video
+                        src={mediaItem.display}
+                        controls
+                        className="w-full h-full object-cover aspect-[2/3] rounded-lg"
+                      />
+                    )}
+                  </div>
+                ))}
               </div>
             </CardBody>
 
-            <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex items-center justify-end p-4 bg-gradient-to-t dark:from-black from-white">
-              <span className="material-symbols-outlined dark:text-white text-gray-900">
-                east
-              </span>
+            <CardFooter className="p-0 flex items-center justify-end px-4">
+              <button onClick={() => router.push(project.href)}>
+                <span className="material-symbols-outlined dark:text-white text-gray-900">
+                  east
+                </span>
+              </button>
             </CardFooter>
           </Card>
         ))}
