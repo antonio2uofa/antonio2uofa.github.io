@@ -339,6 +339,16 @@ export default function DefaultLayout() {
                       ))}
                     </div>
                   )}
+                  {!selectedProject?.isBlogType && (
+                    <CardFooter
+                      onClick={() => router.push(selectedProject.href)}
+                      className="rounded-b-xl absolute bottom-0 z-10 flex items-center justify-end bg-gradient-to-t from-white dark:from-black cursor-pointer transition-all duration-150 active:scale-95 hover:bg-gray-200 dark:hover:bg-gray-700"
+                    >
+                      <span className="material-symbols-outlined text-black dark:text-white">
+                        east
+                      </span>
+                    </CardFooter>
+                  )}
                 </Card>
                 <div className="flex gap-2 mt-2">
                   {selectedProject.tags.map((tag) => (
@@ -456,7 +466,7 @@ export default function DefaultLayout() {
 
             <CardFooter
               onClick={() => router.push(project.href)}
-              className="flex items-center justify-end pt-0 cursor-pointer transition-all duration-150 active:scale-95"
+              className="flex items-center justify-end pt-0 cursor-pointer transition-all duration-300 active:scale-80"
             >
               <span className="material-symbols-outlined dark:text-white text-gray-900">
                 east
