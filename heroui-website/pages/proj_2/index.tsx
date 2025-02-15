@@ -143,6 +143,25 @@ export default function DefaultLayout() {
       isBlogType: true,
       track: "",
     },
+    {
+      id: 4,
+      title: "CMPUT412 - Duckiebot",
+
+      report: "/ex1/ex2.pdf",
+      description:
+        "Exercise 2 - The first video in the list showcases the robot's ability to rotate on the spot. The second video is a demonstration of the robot completing a path in a 'D' shape. The third video is a demo of the robot moving in a square shape. And the final video is a reverse parking example.",
+      tags: ["Python", "Docker"],
+      media: [
+        { display: "/ex2/IMG_0691.MOV", isImage: false },
+        { display: "/ex2/IMG_0721.MOV", isImage: false },
+        { display: "/ex2/IMG_0723.MOV", isImage: false },
+        { display: "/ex2/IMG_0725.MOV", isImage: false },
+      ],
+      href: "https://github.com/antonio2uofa/CMPUT412",
+      isExternal: true,
+      isBlogType: true,
+      track: "",
+    },
     // Add other projects as needed
   ];
 
