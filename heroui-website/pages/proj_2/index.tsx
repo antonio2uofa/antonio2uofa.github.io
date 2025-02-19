@@ -7,7 +7,6 @@ import { Link } from "@heroui/link";
 
 import useMediaQuery from "@/components/mediaquery";
 import MobileLayout from "@/layouts/mobile";
-import { Head } from "@/layouts/head";
 import { Navbar } from "@/components/navbar";
 import {
   PythonChip,
@@ -17,6 +16,8 @@ import {
   JavaChip,
   FirebaseChip,
   NextJSChip,
+  CppChip,
+  YOLOChip,
 } from "@/components/chips";
 import { GithubIcon } from "@/components/icons";
 
@@ -58,6 +59,10 @@ export default function DefaultLayout() {
         return <FirebaseChip />;
       case "Next.js":
         return <NextJSChip />;
+      case "Cpp":
+        return <CppChip />;
+      case "Yolo":
+        return <YOLOChip />;
       default:
         return (
           <span className="px-2 py-1 text-sm font-semibold bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-300 rounded">
@@ -66,17 +71,6 @@ export default function DefaultLayout() {
         );
     }
   };
-
-  const housedisplays = [
-    "/photos/login.png",
-    "/photos/list.png",
-    "/photos/add_item.png",
-    "/photos/guitar.png",
-  ];
-
-  const [activeIndex, setActiveIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const firstProjectRef = useRef<HTMLDivElement | null>(null);
 
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
@@ -160,6 +154,20 @@ export default function DefaultLayout() {
       href: "https://github.com/antonio2uofa/CMPUT412",
       isExternal: true,
       isBlogType: true,
+      track: "",
+    },
+    {
+      id: 5,
+      title: "Yolo Brawlers",
+
+      report: "",
+      description:
+        "The winning submission to Hacked2025, in which my team and I used yolov11 pose detection to control humanoid fighting robots.",
+      tags: ["Python", "Cpp", "Yolo"],
+      media: [{ display: "/photos/yolo-brawlers.JPG", isImage: true }],
+      href: "https://devpost.com/software/yolo-brawlers",
+      isExternal: true,
+      isBlogType: false,
       track: "",
     },
     // Add other projects as needed

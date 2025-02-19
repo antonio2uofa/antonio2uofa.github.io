@@ -135,3 +135,43 @@ export function TensorFlowChip() {
     </Chip>
   );
 }
+
+// C++ Chip
+export const CppChip = () => {
+  return (
+    <Chip
+      variant="flat"
+      avatar={
+        <div className="h-12 w-12 flex items-center justify-center overflow-hidden rounded-full">
+          <img
+            alt="C++ Logo"
+            className="object-contain w-full h-full"
+            src="/icons/cpp.svg"
+          />
+        </div>
+      }
+    >
+      C++
+    </Chip>
+  );
+};
+
+// YOLOv11/Ultralytics Chip
+export const YOLOChip = () => {
+  return (
+    <Chip
+      variant="flat"
+      avatar={
+        <div className="h-12 w-12 flex items-center justify-center overflow-hidden rounded-full">
+          <img
+            alt="YOLOv11/Ultralytics Logo"
+            className="object-contain w-full h-full"
+            src="/icons/yolo.svg"
+          />
+        </div>
+      }
+    >
+      YOLOv11/Ultralytics
+    </Chip>
+  );
+};
