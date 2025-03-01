@@ -141,7 +141,7 @@ export default function DefaultLayout() {
       id: 4,
       title: "CMPUT412 - Duckiebot",
 
-      report: "/ex1/ex2.pdf",
+      report: "/ex2/ex2.pdf",
       description:
         "Exercise 2 - The first video in the list showcases the robot's ability to rotate on the spot. The second video is a demonstration of the robot completing a path in a 'D' shape. The third video is a demo of the robot moving in a square shape. And the final video is a reverse parking example.",
       tags: ["Python", "Docker"],
