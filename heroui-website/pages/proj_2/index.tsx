@@ -170,6 +170,27 @@ export default function DefaultLayout() {
       isBlogType: false,
       track: "",
     },
+    {
+      id: 4,
+      title: "CMPUT412 - Duckiebot",
+
+      report: "/ex4/ex4.pdf",
+      description:
+        "Exercise 4 - The first five videos demonstrate the robot's ability to detect apriltags and respond to them like real traffic signs. The fifth video shows the robot stopping at crosswalks when empty and waiting at full ones. The last video is a POV of a robot maneuvering around another broken down robot.",
+      tags: ["Python", "Docker"],
+      media: [
+        { display: "/ex4/IMG_0938.mov", isImage: false },
+        { display: "/ex4/IMG_0943.MOV", isImage: false },
+        { display: "/ex4/IMG_0968.MOV", isImage: false },
+        { display: "/ex4/IMG_0975.MOV", isImage: false },
+        { display: "/ex4/IMG_0979.MOV", isImage: false },
+        { display: "/ex4/IMG_0979.MOV", isImage: false },
+      ],
+      href: "https://github.com/antonio2uofa/CMPUT412",
+      isExternal: true,
+      isBlogType: true,
+      track: "",
+    },
     // Add other projects as needed
   ];
 
