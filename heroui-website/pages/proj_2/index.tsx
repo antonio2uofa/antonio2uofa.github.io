@@ -235,8 +235,9 @@ export default function DefaultLayout() {
                   </h5>
                 </div>
               )}
+
               {selectedProject && (
-                <div className="text-left">
+                <div className="text-left max-h-[200px] overflow-y-auto pr-2">
                   <h6 className="text-lg font-medium text-gray-900 dark:text-gray-300">
                     {selectedProject.description}
                   </h6>
