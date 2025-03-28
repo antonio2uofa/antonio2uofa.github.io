@@ -184,7 +184,7 @@ export default function DefaultLayout() {
         { display: "/ex4/IMG_0968.MOV", isImage: false },
         { display: "/ex4/IMG_0975.MOV", isImage: false },
         { display: "/ex4/IMG_0979.MOV", isImage: false },
-        { display: "/ex4/IMG_0979.MOV", isImage: false },
+        { display: "/ex4/FINAL_VID.webm", isImage: false },
       ],
       href: "https://github.com/antonio2uofa/CMPUT412",
       isExternal: true,
