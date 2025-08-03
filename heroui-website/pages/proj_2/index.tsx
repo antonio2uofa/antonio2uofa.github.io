@@ -1,9 +1,14 @@
 import { useState, useEffect, useRef } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
-import { Image } from "@heroui/image";
-import { Button } from "@heroui/button";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Link,
+  Image,
+  Button,
+} from "@heroui/react";
 import { useRouter } from "next/router";
-import { Link } from "@heroui/link";
 
 import useMediaQuery from "@/components/mediaquery";
 import MobileLayout from "@/layouts/mobile";

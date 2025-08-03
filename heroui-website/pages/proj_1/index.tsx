@@ -1,10 +1,15 @@
 import useMediaQuery from "../../components/mediaquery";
 import { useState, useEffect, useRef, ReactNode } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
-import { Image } from "@heroui/image";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Image,
+  Link,
+} from "@heroui/react";
 import { useTheme } from "next-themes"; // Import the theme hook if using Next.js
 import { useRouter } from "next/router";
-import { Link } from "@heroui/link";
 import { Head } from "@/layouts/head";
 import { Navbar } from "@/components/navbar";
 import {

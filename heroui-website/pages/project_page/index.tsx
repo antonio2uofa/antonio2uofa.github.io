@@ -467,8 +467,7 @@
 
 import { useTheme } from "next-themes"; // Import the theme hook if using Next.js
 import { useEffect } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
-import { Image } from "@heroui/image";
+import { Card, CardHeader, CardBody, CardFooter, Image } from "@heroui/react";
 import { useRouter } from "next/router";
 
 import MobileLayout from "@/layouts/mobile";
