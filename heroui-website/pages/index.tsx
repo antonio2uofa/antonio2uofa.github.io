@@ -1,7 +1,5 @@
 import { useRouter } from "next/router";
-import { Card, CardHeader, CardFooter } from "@heroui/card";
-import { Image } from "@heroui/image";
-import { Button } from "@heroui/button";
+import { Card, CardHeader, CardFooter, Image, Button } from "@heroui/react";
 import { useTheme } from "next-themes";
 
 import DesktopLayout from "@/layouts/desktop";
