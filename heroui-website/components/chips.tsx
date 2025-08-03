@@ -1,5 +1,5 @@
 import React from "react";
-import { Chip } from "@heroui/chip"; // Replace with your actual Chip component library
+import { Chip } from "@heroui/react"; // Replace with your actual Chip component library
 
 export const DockerChip = () => {
   return (
